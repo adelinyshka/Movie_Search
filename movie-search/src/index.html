@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="app movie search">
+	<meta name="keywords" content="application for search good movie">
+	<title>Movie Search</title>
+
+	<link rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+</head>
+
+<body>
+
+<header class="d-flex justify-content-center movie-header" role="banner">
+	<h1 class="text-center">Movie Search</h1>
+</header>
+
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+
+				<form class="text-center">
+
+					<label>
+						<i class="fas fa-search fa-lg"
+						   style="position:absolute; top: 5px; left: 10px"></i>
+						<input type="text" id="input">
+						<i class="fas fa-keyboard fa-lg" style="position:absolute; top:
+						5px; right: 10px"></i>
+					</label>
+					<button class="btn-search" id="buttonSearch">Search</button>
+				</form>
+
+			</div>
+			<div class="col-12">
+				<div id="message"></div>
+			</div>
+			<div class="col-12">
+				<div class="btn-left"></div>
+				<div class="wrapper" id="movies-wrapper">
+					<div id="card-container">
+
+						<div class="card-movie">
+							<h5 class="movie-title">название фильма</h5>
+							<img class = "movie-pic" src="assets/img/poster.jpg" alt="">
+							<div class="movie-year">2000</div>
+							<div class = "movie-rate">
+								<i class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
+								рейтинг
+							</div>
+
+
+						</div>
+					</div>
+					<div id="pagination"></div>
+				</div>
+				<div class="btn-right"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer role="footer">
+	<a class="telegram-link p-3"
+	   href="https://tlgg.ru/@adel_dubinnikova"
+	   title="telegram">Telegram</a>
+	<a class="github-link p-3"
+	   href="https://github.com/adelinyshka"
+	   title="github">Github</a>
+</footer>
+
+<script type="text/javascript" src="/assets/js/app.js"></script>
+</body>
+</html>

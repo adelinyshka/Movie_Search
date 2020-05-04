@@ -1,0 +1,44 @@
+main {
+	min-height: calc(100vh - 140px);
+	}
+
+table.table thead th {
+	cursor: pointer;
+	white-space: nowrap;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: #c44949;
+		}
+	}
+
+h1 {
+	margin: 0;
+	}
+
+form {
+	text-align: center;
+	padding: 20px 0;
+
+	& label {
+		position: relative;
+		margin: 0;
+
+		& input {
+			width: 300px;
+			}
+	}
+
+	& .btn-search {
+		background: #fe5e5e;
+		color: black;
+		height: 29px;
+		border-color: transparent;
+		}
+ }
+
+img.movie-pic {
+	width: 200px;
+	display: inline-block;
+	}
