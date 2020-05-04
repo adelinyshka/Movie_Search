@@ -6,9 +6,12 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 import './assets/scss/all_styles.scss';
+import './app/consts';
+import './app/slider-swiper';
+import './app/searcher';
 import './app/api';
 import './app/app';
-import './app/movieCard';
+import './app/movie';
 import './app/paginator';
-import './app/searcher';
 import './app/state';
+

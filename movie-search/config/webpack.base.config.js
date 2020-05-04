@@ -126,7 +126,7 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: PATHS.src + '/assets/img', to: PATHS.assets +`/img` },
             // { from: PATHS.src + '/assets/audio',to: PATHS.assets +`/audio` },
-            // { from: PATHS.src + '/static' },
+            { from: PATHS.src + '/static' },
         ]),
     ],
 };

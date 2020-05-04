@@ -6,11 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="description" content="app movie search">
 	<meta name="keywords" content="application for search good movie">
+	<link rel="icon" href="static/favicon.ico">
 	<title>Movie Search</title>
 
 	<link rel="stylesheet"
 	      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
 </head>
 
 <body>
@@ -25,15 +25,23 @@
 			<div class="col-12">
 
 				<form class="text-center">
+					<div class="form-group">
+						<label>
+							<i class="fas fa-search fa-lg"
+							   style="position:absolute; top: 10px; left: 11px"></i>
+							<input class="form-control input-movie" type="text"
+							       id="movie-input"
+							       placeholder="Search movie"
+							       autofocus tabindex="0">
+							<i class="fas fa-keyboard fa-2x" style="position:absolute; top:
+						6px; right: 10px"></i>
+						</label>
 
-					<label>
-						<i class="fas fa-search fa-lg"
-						   style="position:absolute; top: 5px; left: 10px"></i>
-						<input type="text" id="input">
-						<i class="fas fa-keyboard fa-lg" style="position:absolute; top:
-						5px; right: 10px"></i>
-					</label>
-					<button class="btn-search" id="buttonSearch">Search</button>
+						<button class="btn-search" id="buttonSearch">Search</button>
+
+					</div>
+
+
 				</form>
 
 			</div>
@@ -42,22 +50,18 @@
 			</div>
 			<div class="col-12">
 				<div class="btn-left"></div>
-				<div class="wrapper" id="movies-wrapper">
-					<div id="card-container">
-
-						<div class="card-movie">
-							<h5 class="movie-title">название фильма</h5>
-							<img class = "movie-pic" src="assets/img/poster.jpg" alt="">
-							<div class="movie-year">2000</div>
-							<div class = "movie-rate">
-								<i class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
-								рейтинг
-							</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper" id="movies-wrapper">
 
 
-						</div>
+
+						<div class="swiper-pagination" id="pagination"></div>
+
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-scrollbar"></div>
+
 					</div>
-					<div id="pagination"></div>
 				</div>
 				<div class="btn-right"></div>
 			</div>
@@ -73,7 +77,9 @@
 	   href="https://github.com/adelinyshka"
 	   title="github">Github</a>
 </footer>
-
+<script>
+	sliderSwiper.init();
+</script>
 <script type="text/javascript" src="/assets/js/app.js"></script>
 </body>
 </html>
