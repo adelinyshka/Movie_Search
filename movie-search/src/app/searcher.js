@@ -62,7 +62,7 @@ function clearMovieData() {
 
 
 
-let urlToSendToApiDefault = `http://www.omdbapi.com/?s=life&apikey=${apikey}&`;
+let urlToSendToApiDefault = `https://www.omdbapi.com/?s=life&apikey=${apikey}&`;
 callApiDefault();
 
 function callApiDefault() {
@@ -82,7 +82,7 @@ elSearchBtn.addEventListener('click', function (e) {
 	elSearchInput.focus();
 
 	let userInput = elSearchInput.value;
-	let urlToSendToApi = `http://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`;
+	let urlToSendToApi = `https://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`;
 
 
 	e.preventDefault();

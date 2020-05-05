@@ -1,5 +1,4 @@
-[Ссылка на задание Movie Search](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/movie-search.md)
-
+[Movie Search App](adelinyshka-movie-search.netlify.app)
 
 Установка зависимостей
 
