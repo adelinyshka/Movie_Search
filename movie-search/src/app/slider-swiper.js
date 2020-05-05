@@ -1,5 +1,6 @@
 import Swiper from 'swiper';
-
+// todo сделать стрелочки и чтобы переключали
+// todo сделать пагинацию
 var sliderSwiper = new Swiper('.swiper-container', {
 	updateOnWindowResize: true,
 	spaceBetween: 20,
