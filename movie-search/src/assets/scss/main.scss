@@ -93,6 +93,8 @@ h5.movie-title {
 #message {
 	position: relative;
 	height: 50px;
+	text-align: center;
+	padding: 20px;
 	}
 
 @media (max-width: 410px) {
@@ -100,4 +102,8 @@ h5.movie-title {
 		width: 300px;
 		margin: 20px 0 ;
 		}
+	}
+
+.container-for-load-icon {
+	position: relative;
 	}

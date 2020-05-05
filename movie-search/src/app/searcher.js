@@ -1,4 +1,4 @@
-import {elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear,elMessage} from './consts';
+import {elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear,elLoadIcon,elMessage} from './consts';
 import {Spinner} from 'spin.js';
 
 var opts = {
@@ -30,18 +30,24 @@ elSearchInput.focus();
 
 function generateMovieCards(data) {
 
-	for(let i = 0; i<data.Search.length;i++) {
+	let userInput = elSearchInput.value;
 
-		let title = data.Search[i].Title;
-		let poster = data.Search[i].Poster;
-		let year = data.Search[i].Year;
-		let id = data.Search[i].imdbID;
+	if (data.Response === 'False') {
+		elMessage.textContent = `No result found for ... "${userInput}"`;
+	} else {
+		elMessage.textContent = '';
+		for(let i = 0; i<data.Search.length;i++) {
+
+			let title = data.Search[i].Title;
+			let poster = data.Search[i].Poster;
+			let year = data.Search[i].Year;
+			let id = data.Search[i].imdbID;
 
 
-		let movieCard = document.createElement('div');
-		movieCard.classList.add('movie-card','swiper-slide');
+			let movieCard = document.createElement('div');
+			movieCard.classList.add('movie-card','swiper-slide');
 
-		movieCard.innerHTML =`
+			movieCard.innerHTML =`
 			<h5 class="movie-title" tabindex="0" >${title}</h5>
 			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
 			<div class="movie-year" tabindex="0" >${year}</div>
@@ -51,7 +57,8 @@ rate
 			</div>
 		`;
 
-		cardWrapper.append(movieCard)
+			cardWrapper.append(movieCard)
+		}
 	}
 }
 
@@ -59,19 +66,24 @@ function clearMovieData() {
 	cardWrapper.innerHTML = '';
 }
 
-const arrOfPlaceForRating = document.querySelectorAll('#movie-rating');
-var target = document.getElementById('foo');
-
 function callApi(url) {
-	var spinner = new Spinner(opts).spin(elMessage);
+	var spinner = new Spinner(opts).spin(elLoadIcon);
+	console.log(elLoadIcon);
+
 	return fetch(url)
 		.then(res => res.json())
 		.then(data => {
+			// if(data.Response === 'False') {
+			// 	console.log('im false')
+			// } else {
+			// 	console.log('im true')
+			// }
 
 			generateMovieCards(data);
-			elMessage.textContent = '';
+			elLoadIcon.textContent = '';
 		});
 }
+
 
 let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&`;
 callApi(urlToSendToApiDefault);
@@ -85,8 +97,6 @@ elSearchBtn.addEventListener('click', function (e) {
 
 	e.preventDefault();
 	callApi(urlToSendToApi);
-
-
 	elSearchInput.focus();
 
 	if(elSearchInput.value !== '') {
@@ -99,6 +109,7 @@ elSearchBtn.addEventListener('click', function (e) {
 
 	if(elIconClear.classList.contains('shown')) {
 		elIconClear.addEventListener('click', function () {
+			elMessage.textContent = '';
 			elSearchInput.value = '';
 			elIconClear.classList.remove('shown');
 			elIconClear.classList.add('hidden');
