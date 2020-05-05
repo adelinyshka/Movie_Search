@@ -24,7 +24,6 @@ var opts = {
 
 // todo сделать рейтинг
 //todo сделать  переключение языков с русского на английский
-//todo сделать вывод сообщения
 
 elSearchInput.focus();
 
@@ -85,7 +84,7 @@ function callApi(url) {
 }
 
 
-let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&`;
+let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`;
 callApi(urlToSendToApiDefault);
 
 elSearchBtn.addEventListener('click', function (e) {
