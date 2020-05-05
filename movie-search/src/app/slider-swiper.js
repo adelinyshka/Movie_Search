@@ -5,6 +5,9 @@ var sliderSwiper = new Swiper('.swiper-container', {
 	spaceBetween: 20,
 	effect: 'slide',
 	slidesPerView: 4,
+	slidesPerGroup: 4,
+	observer: true,
+	observeParents: true,
 	breakpoints: {
 		320: {
 			slidesPerView: 1,
@@ -34,8 +37,3 @@ var sliderSwiper = new Swiper('.swiper-container', {
 	},
 
 });
-
-
-
-export {sliderSwiper};
-

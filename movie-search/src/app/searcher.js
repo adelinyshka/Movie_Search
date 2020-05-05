@@ -1,7 +1,7 @@
 import {elSearchInput, elSearchBtn,apikey,cardWrapper} from './consts';
-import {sliderSwiper} from './slider-swiper';
 
 elSearchInput.focus();
+
 
 // function getRating(id) {
 // 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
@@ -74,9 +74,6 @@ function callApiDefault() {
 }
 
 
-
-
-
 elSearchBtn.addEventListener('click', function (e) {
 	clearMovieData();
 	elSearchInput.focus();
@@ -86,7 +83,6 @@ elSearchBtn.addEventListener('click', function (e) {
 
 
 	e.preventDefault();
-	sliderSwiper.init();
 	return fetch(urlToSendToApi)
 		.then(res => res.json())
 		.then(data => {
