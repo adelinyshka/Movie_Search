@@ -16,12 +16,17 @@
 <body>
 
 <header class="d-flex justify-content-center movie-header" role="banner">
-	<h1 class="text-center">Movie Search</h1>
+	<h1 class="text-center" tabindex="0" >Movie Search</h1>
 </header>
 
 <main>
 	<div class="container-fluid">
 		<div class="row">
+			<div class="col-12">
+				<div class="" id="message">
+					<span id="load-icon"></span>
+				</div>
+			</div>
 			<div class="col-12">
 
 				<form class="text-center">
@@ -32,7 +37,7 @@
 							<input class="form-control input-movie" type="text"
 							       id="movie-input"
 							       placeholder="Search movie"
-							       autofocus tabindex="0">
+							       autofocus tabindex="0" autocomplete="off">
 							<svg style="position:absolute; top: 4px; right: 50px"
 							     id="icon-clear" class="bi bi-x hidden" width="2em"
 							     height="2em"
@@ -41,6 +46,7 @@
 								<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
 								<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
 							</svg>
+
 <!--							<i class="far fa-times-circle fa-lg text-black-50 hidden"-->
 <!--							   id="icon-clear"-->
 <!--							   style="position:absolute; top: 9px; right: 55px"></i>-->
@@ -48,7 +54,7 @@
 							top:4px; right: 10px"></i>
 						</label>
 
-						<button class="btn-search" id="buttonSearch">Search</button>
+						<button class="btn-search" id="buttonSearch" tabindex="0" >Search</button>
 
 					</div>
 
@@ -56,11 +62,9 @@
 				</form>
 
 			</div>
+
 			<div class="col-12">
-				<div id="message"></div>
-			</div>
-			<div class="col-12">
-				<div class="btn-left"></div>
+<!--				<div class="btn-left"></div>-->
 				<div class="swiper-container">
 					<div class="swiper-wrapper" id="movies-wrapper">
 
@@ -70,11 +74,10 @@
 
 						<div class="swiper-button-prev"></div>
 						<div class="swiper-button-next"></div>
-						<div class="swiper-scrollbar"></div>
 
 					</div>
 				</div>
-				<div class="btn-right"></div>
+<!--				<div class="btn-right"></div>-->
 			</div>
 		</div>
 	</div>
@@ -83,10 +86,10 @@
 <footer role="footer">
 	<a class="telegram-link p-3"
 	   href="https://tlgg.ru/@adel_dubinnikova"
-	   title="telegram">Telegram</a>
+	   title="telegram" tabindex="0">Telegram</a>
 	<a class="github-link p-3"
 	   href="https://github.com/adelinyshka"
-	   title="github">Github</a>
+	   title="github" tabindex="0">Github</a>
 </footer>
 
 <script type="text/javascript" src="/assets/js/app.js"></script>

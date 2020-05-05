@@ -1,35 +1,32 @@
-import {elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear} from './consts';
+import {elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear,elMessage} from './consts';
+import {Spinner} from 'spin.js';
+
+var opts = {
+	lines: 12, // The number of lines to draw
+	length: 6, // The length of each line
+	width: 1, // The line thickness
+	radius: 5, // The radius of the inner circle
+	scale: 1, // Scales overall size of the spinner
+	corners: 1, // Corner roundness (0..1)
+	color: 'red', // CSS color or array of colors
+	fadeColor: 'transparent', // CSS color or array of colors
+	speed: 1, // Rounds per second
+	rotate: 0, // The rotation offset
+	animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
+	direction: 1, // 1: clockwise, -1: counterclockwise
+	zIndex: 2e9, // The z-index (defaults to 2000000000)
+	className: 'spinner', // The CSS class to assign to the spinner
+	top: '50%', // Top position relative to parent
+	left: '50%', // Left position relative to parent
+	shadow: '0 0 1px transparent', // Box-shadow for the lines
+	position: 'absolute' // Element positioning
+};
 
 // todo сделать рейтинг
 //todo сделать  переключение языков с русского на английский
 //todo сделать вывод сообщения
 
 elSearchInput.focus();
-
-
-// function getRating(id) {
-// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
-//
-// 	return fetch(url)
-// 		.then(res => res.json())
-// 		.then(data => {
-//
-// 			console.log(data.imdbRating)
-// 		});
-// }
-
-
-// function getRating2(id) {
-// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
-//
-// 	return fetch(url)
-// 		.then(res => res.json())
-// 		.then(data => {
-//
-// 			data.Ratings[0].Value;
-// 		});
-// }
-
 
 function generateMovieCards(data) {
 
@@ -39,43 +36,45 @@ function generateMovieCards(data) {
 		let poster = data.Search[i].Poster;
 		let year = data.Search[i].Year;
 		let id = data.Search[i].imdbID;
-		// let rate = getRating2(id);
-		// ${rate}
+
+
 		let movieCard = document.createElement('div');
 		movieCard.classList.add('movie-card','swiper-slide');
 
 		movieCard.innerHTML =`
-			<h5 class="movie-title">${title}</h5>
-			<img class = "movie-pic" src="${poster}" alt="${title}">
-			<div class="movie-year">${year}</div>
-			<div class = "movie-rate">
-				<i class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
-			rating
+			<h5 class="movie-title" tabindex="0" >${title}</h5>
+			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
+			<div class="movie-year" tabindex="0" >${year}</div>
+			<div class = "movie-rate" tabindex="0" >
+				<i id="movie-rating" class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
+rate
 			</div>
 		`;
 
 		cardWrapper.append(movieCard)
 	}
-
 }
 
 function clearMovieData() {
 	cardWrapper.innerHTML = '';
 }
 
+const arrOfPlaceForRating = document.querySelectorAll('#movie-rating');
+var target = document.getElementById('foo');
 
 function callApi(url) {
+	var spinner = new Spinner(opts).spin(elMessage);
 	return fetch(url)
 		.then(res => res.json())
 		.then(data => {
+
 			generateMovieCards(data);
+			elMessage.textContent = '';
 		});
 }
 
-
 let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&`;
 callApi(urlToSendToApiDefault);
-
 
 elSearchBtn.addEventListener('click', function (e) {
 	clearMovieData();
@@ -84,9 +83,9 @@ elSearchBtn.addEventListener('click', function (e) {
 	let userInput = elSearchInput.value;
 	let urlToSendToApi = `https://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`;
 
-
 	e.preventDefault();
 	callApi(urlToSendToApi);
+
 
 	elSearchInput.focus();
 
@@ -107,3 +106,40 @@ elSearchBtn.addEventListener('click', function (e) {
 	}
 });
 
+
+
+// function generateRate() {
+//
+// 	return fetch(url)
+// 		.then(res => res.json())
+// 		.then(data => {
+// 			data;
+// 		});
+// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
+//
+// 	arrOfPlaceForRating.forEach(item => {
+//
+// 		return fetch(url)
+// 			.then(res => res.json())
+// 			.then(data => {
+// 				console.log(data.imdbRating);
+// 			});
+//
+// 	})
+//
+// }
+
+// function getRating(id) {
+// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
+//
+// 	return fetch(url)
+// 		.then(res => res.json())
+//
+// 		.then(data => {
+// 			data.imdbRating;
+// 		});
+//
+// }
+//
+//
+// getRating('tt0180093');

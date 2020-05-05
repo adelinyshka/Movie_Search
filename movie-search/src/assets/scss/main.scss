@@ -82,3 +82,22 @@ h5.movie-title {
 		fill: black;
 		}
 	}
+
+#load-icon {
+	position: absolute;
+	top: 36px;
+	right: 0;
+	left: 0;
+	}
+
+#message {
+	position: relative;
+	height: 50px;
+	}
+
+@media (max-width: 410px) {
+	form .btn-search {
+		width: 300px;
+		margin: 20px 0 ;
+		}
+	}
