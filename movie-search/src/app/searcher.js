@@ -26,22 +26,65 @@ var opts = {
 //todo сделать  переключение языков с русского на английский
 
 elSearchInput.focus();
+let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`;
+callApi(urlToSendToApiDefault);
 
-function generateMovieCards(data) {
 
-	let userInput = elSearchInput.value;
+let urlToSendToApi;
+
+function callYaApi(userInput) {
+	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
+	let url = `https://translate.yandex.net/api/v1.5/tr.json/translate
+?key=${yaApi}
+&text=${userInput}
+&lang=ru-en
+&format=plain
+`;
+	return fetch(url)
+		.then(res => res.json())
+		.then(data => {
+			// console.log(data)
+
+			 generateEnglishInput(data);
+		});
+}
+
+async function returnRate(id) {
+	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
+	return fetch(url)
+		.then(res => res.json())
+		.then(data => {
+			data.imdbRating;
+		});
+}
+
+
+
+
+function generateEnglishInput(data) {
+	elMessage.textContent = `No result found for ... "${data.text}"`;
+	// generateUrl(data);
+}
+
+function generateUrl(data) {
+	 urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}`;
+	 return urlToSendToApi;
+}
+async function generateMovieCards(data) {
+
+let userInput = elSearchInput.value;
 
 	if (data.Response === 'False') {
 		elMessage.textContent = `No result found for ... "${userInput}"`;
 	} else {
 		elMessage.textContent = '';
 		for(let i = 0; i<data.Search.length;i++) {
-
 			let title = data.Search[i].Title;
 			let poster = data.Search[i].Poster;
 			let year = data.Search[i].Year;
-			let id = data.Search[i].imdbID;
 
+			let id = data.Search[i].imdbID;
+			let rate = await returnRate(id);
 
 			let movieCard = document.createElement('div');
 			movieCard.classList.add('movie-card','swiper-slide');
@@ -50,16 +93,24 @@ function generateMovieCards(data) {
 			<h5 class="movie-title" tabindex="0" >${title}</h5>
 			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
 			<div class="movie-year" tabindex="0" >${year}</div>
-			<div class = "movie-rate" tabindex="0" >
-				<i id="movie-rating" class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
-rate
+			<div class = "movie-rate" tabindex="0" id="${id}">
+				<i id="${id}" class="fa fa-star fa-sm text-warning" aria-hidden="true"></i>
+				${rate}
 			</div>
 		`;
 
 			cardWrapper.append(movieCard)
+			setTimeout(function () {
+				movieCard.append(rate);
+			},2000)
 		}
 	}
 }
+
+
+// setTimeout(function () {
+// 	console.log(tryIt())
+// },1000)
 
 function clearMovieData() {
 	cardWrapper.innerHTML = '';
@@ -67,35 +118,47 @@ function clearMovieData() {
 
 function callApi(url) {
 	var spinner = new Spinner(opts).spin(elLoadIcon);
-	console.log(elLoadIcon);
 
 	return fetch(url)
 		.then(res => res.json())
 		.then(data => {
-			// if(data.Response === 'False') {
-			// 	console.log('im false')
-			// } else {
-			// 	console.log('im true')
-			// }
-
+			callYaApi(elSearchInput.value);
 			generateMovieCards(data);
 			elLoadIcon.textContent = '';
-		});
+		})
+
+
+}
+
+async function getRaiting(prop){
+	try{
+		const {imdbId} = prop;
+		const url = `https://www.omdbapi.com/?i=${imdbId}&apikey=${apikey}`;
+		const res = await fetch(url);
+		const data = await res.json();
+		Object.assign(prop,data);
+		return data;
+
+	}
+	catch(e){
+		console.error(e);
+	}
+
 }
 
 
-let urlToSendToApiDefault = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`;
-callApi(urlToSendToApiDefault);
-
 elSearchBtn.addEventListener('click', function (e) {
-	clearMovieData();
-	elSearchInput.focus();
-
-	let userInput = elSearchInput.value;
-	let urlToSendToApi = `https://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`;
-
 	e.preventDefault();
+
+
+	elSearchInput.focus();
+	let userInput = elSearchInput.value;
+
+	clearMovieData();
+
+	let urlToSendToApi = `https://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`;
 	callApi(urlToSendToApi);
+
 	elSearchInput.focus();
 
 	if(elSearchInput.value !== '') {
@@ -114,42 +177,6 @@ elSearchBtn.addEventListener('click', function (e) {
 			elIconClear.classList.add('hidden');
 		})
 	}
+
 });
 
-
-
-// function generateRate() {
-//
-// 	return fetch(url)
-// 		.then(res => res.json())
-// 		.then(data => {
-// 			data;
-// 		});
-// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
-//
-// 	arrOfPlaceForRating.forEach(item => {
-//
-// 		return fetch(url)
-// 			.then(res => res.json())
-// 			.then(data => {
-// 				console.log(data.imdbRating);
-// 			});
-//
-// 	})
-//
-// }
-
-// function getRating(id) {
-// 	let url = `https://www.omdbapi.com/?i=${id}&apikey=${apikey}`;
-//
-// 	return fetch(url)
-// 		.then(res => res.json())
-//
-// 		.then(data => {
-// 			data.imdbRating;
-// 		});
-//
-// }
-//
-//
-// getRating('tt0180093');

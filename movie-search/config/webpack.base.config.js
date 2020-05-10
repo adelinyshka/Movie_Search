@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 let PrettierPlugin = require("prettier-webpack-plugin");
+require('babel-polyfill');
 
 
 const PATHS = {
@@ -17,7 +18,7 @@ module.exports = {
         paths: PATHS
     },
     entry: {
-        app: PATHS.src
+        app: ['babel-polyfill', PATHS.src]
     },
     output: {
         filename: `${PATHS.assets}js/[name].js`,

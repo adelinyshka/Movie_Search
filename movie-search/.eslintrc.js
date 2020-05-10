@@ -1,28 +1,20 @@
 module.exports = {
     env: {
+        commonjs: true,
         es6: true,
-        browser: true,
         node: true,
+        mocha: true,
     },
-    extends: ['airbnb-base'],
-    plugins: [
-        'babel',
-        'import',
-        'prettier',
+    extends: [
+        'airbnb-base',
     ],
-    parser: 'babel-eslint',
+    globals: {
+        Atomics: 'readonly',
+        SharedArrayBuffer: 'readonly',
+    },
     parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true
-        }
+        ecmaVersion: 2018,
     },
     rules: {
-        'no-plusplus': 'off',
-        'max-len': ['error', 100, 2, { ignoreUrls: true, }],
-        'no-console': 'error',
-        'no-alert': 'error',
-        'prettier/prettier': ['error'],
     },
 };
