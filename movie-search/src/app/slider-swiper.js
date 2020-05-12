@@ -1,20 +1,17 @@
 import Swiper from 'swiper';
-// todo сделать стрелочки и чтобы переключали
-// todo сделать пагинацию
 
 
-const swiper = new Swiper('.swiper-container', {
-	// direction: 'ho',
-	// loop: true,
+var swiper = new Swiper('.swiper-container', {
 	keyboardControl: true,
 	updateOnWindowResize: true,
 	spaceBetween: 20,
 	effect: 'slide',
 	preloadImages:true,
 	updateOnImagesReady:true,
-	slidesPerGroup: 4,
+	slidesPerGroup: 1,
 	observer: true,
 	observeParents: true,
+
 
 	breakpoints: {
 		320: {
@@ -25,17 +22,17 @@ const swiper = new Swiper('.swiper-container', {
 		430: {
 			slidesPerView: 2,
 			spaceBetween: 30,
-			slidesPerGroup: 2
+			slidesPerGroup: 1
 		},
 		650: {
 			slidesPerView: 3,
 			spaceBetween: 30,
-			slidesPerGroup: 3
+			slidesPerGroup: 1
 		},
 		886: {
 			slidesPerView: 4,
 			spaceBetween: 40,
-			slidesPerGroup: 4
+			slidesPerGroup: 1
 		}
 	},
 	pagination: {
@@ -50,3 +47,10 @@ const swiper = new Swiper('.swiper-container', {
 	},
 });
 
+const mySwiper = document.querySelector('.swiper-container').swiper
+
+mySwiper.init();
+mySwiper.slideTo(4);
+
+
+export default swiper;
