@@ -17,7 +17,7 @@ import swiper from './slider-swiper';
 	lines: 12, // The number of lines to draw
 	length: 6, // The length of each line
 	width: 1, // The line thickness
-	radius: 5, // The radius of the inner circle
+	radius: 10, // The radius of the inner circle
 	scale: 1, // Scales overall size of the spinner
 	corners: 1, // Corner roundness (0..1)
 	color: 'red', // CSS color or array of colors
@@ -36,8 +36,10 @@ import swiper from './slider-swiper';
 
 elSearchInput.focus();
 
+let proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+	targetUrl = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`;
 
-const requestDefaultMovies = fetch(`https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`);
+const requestDefaultMovies = fetch(proxyUrl+targetUrl);
 
 requestDefaultMovies
 	.then((response) => {
@@ -54,7 +56,7 @@ requestDefaultMovies
 		console.log(error)
 	});
 
-const requestDefaultMovies2 = fetch(`https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=1`);
+const requestDefaultMovies2 = fetch(proxyUrl+targetUrl);
 
 requestDefaultMovies2
 	.then((response) => response.json())
@@ -70,11 +72,10 @@ function getMoviesIds(data) {
 
 	for (let i of data) {
 		let ix = i.imdbID;
-		let url = `https://www.omdbapi.com/?i=${ix}&apikey=${apikey}`;
+		let url = proxyUrl+`https://www.omdbapi.com/?i=${ix}&apikey=${apikey}`;
 		fetch(url)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
 				pushRateToMovie(data)})
 	}
 }
@@ -130,4 +131,4 @@ async function parseData(data) {
 //
 // let wordToInput = translateRuToEng(input);
 
-export {opts,parseData,pushRateToMovie,getMoviesIds};
+export {opts,parseData,pushRateToMovie,getMoviesIds, proxyUrl};
