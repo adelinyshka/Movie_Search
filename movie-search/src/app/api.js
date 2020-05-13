@@ -187,9 +187,7 @@ function makeResults() {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			console.log(error)
 		});
-	mySwiper.updateSlidesClasses();
-	mySwiper.updateSlides();
-	mySwiper.allowSlideNext
+
 }
 
 
@@ -198,6 +196,9 @@ mySwiper.on('reachEnd', async () => {
 	page++;
 
 });
+mySwiper.updateSlidesClasses();
+mySwiper.updateSlides();
+mySwiper.allowSlideNext
 
 
 

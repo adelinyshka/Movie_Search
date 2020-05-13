@@ -12,9 +12,11 @@ var swiper = new Swiper('.swiper-container', {
 	observer: true,
 	observeParents: true,
 	observeSlideChildren: true,
-	watchSlidesVisibility: true,
+	// watchSlidesVisibility: true,
 	watchState: true,
 	watchSlidesProgress: true,
+	grabCursor: true,
+	simulateTouch: true,
 
 	breakpoints: {
 		320: {

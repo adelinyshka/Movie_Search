@@ -56,6 +56,12 @@ img.movie-pic {
 	width: 200px;
 	height: 300px;
 	display: inline-block;
+
+	&:hover,
+	&:focus,
+	&:active {
+		transform: scale(1.2);
+		}
 	}
 
 h5.movie-title {
