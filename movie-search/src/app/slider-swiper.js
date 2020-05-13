@@ -4,14 +4,17 @@ import Swiper from 'swiper';
 var swiper = new Swiper('.swiper-container', {
 	keyboardControl: true,
 	updateOnWindowResize: true,
+	updateOnImagesReady:true,
 	spaceBetween: 20,
 	effect: 'slide',
 	preloadImages:true,
-	updateOnImagesReady:true,
 	slidesPerGroup: 1,
 	observer: true,
 	observeParents: true,
-
+	observeSlideChildren: true,
+	watchSlidesVisibility: true,
+	watchState: true,
+	watchSlidesProgress: true,
 
 	breakpoints: {
 		320: {

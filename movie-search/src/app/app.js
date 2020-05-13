@@ -21,7 +21,7 @@ elSearchBtn.addEventListener('click', function (e) {
 	if (userInput.length < 3) {
 		elMessage.textContent = 'Введите минимум 3 символа';
 	} else {
-		elMessage.textContent = `Looking for ${userInput}`;
+		elMessage.textContent = `Looking for ... ${userInput}`;
 		translateAllToEng(userInput);
 	}
 	elSearchInput.focus();
@@ -101,7 +101,7 @@ async function translateAllToEng(input) {
 				callApi(urlToSendToApi);
 				callRate(data.text);
 				btnSearch.textContent = 'Search';
-				elMessage.textContent = `Showing results for ${data.text}`;
+				elMessage.textContent = `Showing results for ... ${data.text}`;
 			}
 		})
 		.catch((error) => {

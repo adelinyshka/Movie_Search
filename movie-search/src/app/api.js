@@ -12,11 +12,10 @@ import {
 } from 'spin.js';
 import mySwiper from './slider-swiper';
 
-// todo спинет работает не так надо чтобы начинал сразу как начался поиск
 //todo вместо не загруженных картинок - сделать картнку по умолчанию
-//todo сделать подгрузку следующих картинок по клику на стрелку сфайпера
 //todo поиск по вводу с клавы
-
+//todo слайдер после достижения конца страницы подвисает и стрелочка вправо не
+// работает
 var opts = {
 	lines: 18, // The number of lines to draw
 	length: 10, // The length of each line
@@ -38,8 +37,8 @@ var opts = {
 	position: 'absolute', // Element positioning
 };
 
-function showDefaultMovies(page) {
-	let targetUrl = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=${page}`;
+
+	let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
 	elSearchInput.focus();
 
 	const requestDefaultMovies = fetch(targetUrl);
@@ -62,9 +61,11 @@ function showDefaultMovies(page) {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			console.log(error)
 		});
-}
 
-showDefaultMovies(1);
+
+// document.onload =() => {
+// 	showDefaultMovies(1);
+// }
 
 function pushRateToMovie(data) {
 	let x = document.querySelector(`#${data.imdbID}`);
@@ -164,7 +165,7 @@ let page = 2;
 
 function makeResults() {
 
-	let targetUrl = `https://www.omdbapi.com/?s=dream&apikey=${apikey}&page=${page}`;
+	let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=${page}`;
 	let spinner = new Spinner(opts).spin(elLoadIcon);
 	fetch(targetUrl)
 		.then((response) => {
@@ -186,11 +187,21 @@ function makeResults() {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			console.log(error)
 		});
+	mySwiper.updateSlidesClasses();
+	mySwiper.updateSlides();
+	mySwiper.allowSlideNext
 }
+
 
 mySwiper.on('reachEnd', async () => {
 	makeResults();
 	page++;
+
 });
+
+
+
+
+
 
 export {opts, parseData, getMoviesIds};
