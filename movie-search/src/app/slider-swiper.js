@@ -50,7 +50,7 @@ var swiper = new Swiper('.swiper-container', {
 const mySwiper = document.querySelector('.swiper-container').swiper
 
 mySwiper.init();
-mySwiper.slideTo(4);
+mySwiper.slideTo(0);
 
 
-export default swiper;
+export default mySwiper;
