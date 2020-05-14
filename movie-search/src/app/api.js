@@ -96,15 +96,12 @@ async function parseData(data) {
 			movieCard.classList.add('movie-card', 'swiper-slide');
 
 			movieCard.innerHTML = `
-		
-		<div class="movie-year" tabindex="0" >${year}</div>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
-			
+			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
 				<div class = "movie-rate" tabindex="0" id="${id}"></div>
-						<h5 class="movie-title" tabindex="0" >
-			<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a></h5>
-			
-			
+				<div class="movie-year" tabindex="0" >${year}</div>
+				<h5 class="movie-title" tabindex="0" >
+					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
+				</h5>
 		`;
 			cardWrapper.append(movieCard);
 		}
@@ -133,10 +130,10 @@ async function addNewMovies(data) {
 
 			movieCard.innerHTML = `
 				
-			<div class="movie-year" tabindex="0" >${year}</div>
+			
 			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
 			<div class = "movie-rate" tabindex="0" id="${id}"></div>
-			
+			<div class="movie-year" tabindex="0" >${year}</div>
 			<h5 class="movie-title" tabindex="0" >
 				<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
 			</h5>	

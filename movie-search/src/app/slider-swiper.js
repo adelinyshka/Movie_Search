@@ -24,17 +24,17 @@ var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 20,
 			slidesPerGroup: 1
 		},
-		430: {
+		538: {
 			slidesPerView: 2,
 			spaceBetween: 30,
 			slidesPerGroup: 1
 		},
-		650: {
+		799: {
 			slidesPerView: 3,
 			spaceBetween: 30,
 			slidesPerGroup: 1
 		},
-		886: {
+		1040: {
 			slidesPerView: 4,
 			spaceBetween: 40,
 			slidesPerGroup: 1

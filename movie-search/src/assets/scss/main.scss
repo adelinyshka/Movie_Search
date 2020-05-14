@@ -54,8 +54,8 @@ form {
  }
 
 img.movie-pic {
-	width: 200px;
-	height: 300px;
+	width: 250px;
+	height: 350px;
 	display: inline-block;
 
 	&:hover,
@@ -201,4 +201,8 @@ button.with-cross {
 	margin-top: 20px;
 	color: #ffffffc9;
 	font-size: 19px;
+	}
+
+.movie-year {
+	color: white;
 	}
