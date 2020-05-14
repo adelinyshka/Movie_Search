@@ -31,6 +31,13 @@ class Keyboard {
 		this.keyboardWrapper.setAttribute('data', 'wrap');
 		formMovie.append(this.keyboardWrapper);
 
+		this.title = document.createElement('div');
+		this.title.classList.add('text-center');
+		this.title.style.color = 'white';
+		this.title.style.fontSize = '12px';
+		this.title.innerText = 'Смена языка: левый Ctrl + Alt';
+		this.keyboardWrapper.before(this.title);
+
 //row1
 		this.row1 = document.createElement('div');
 		this.row1.classList.add('keyboard_line');

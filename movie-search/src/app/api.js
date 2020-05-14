@@ -19,14 +19,14 @@ import {Keyboard} from './keyboard';
 // работает
 var opts = {
 	lines: 18, // The number of lines to draw
-	length: 10, // The length of each line
-	width: 1, // The line thickness
-	radius: 15, // The radius of the inner circle
+	length: 5, // The length of each line
+	width: 2, // The line thickness
+	radius: 10, // The radius of the inner circle
 	scale: 1, // Scales overall size of the spinner
 	corners: 1, // Corner roundness (0..1)
 	color: 'white', // CSS color or array of colors
 	fadeColor: 'transparent', // CSS color or array of colors
-	speed: 1, // Rounds per second
+	speed: 0.5, // Rounds per second
 	rotate: 0, // The rotation offset
 	animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
 	direction: 1, // 1: clockwise, -1: counterclockwise

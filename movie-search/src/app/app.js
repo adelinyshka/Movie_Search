@@ -124,6 +124,7 @@ document.addEventListener('keydown', function(e){
 		}
 		elSearchInput.focus();
 	}
+
 });
 
 export {translateAllToEng}

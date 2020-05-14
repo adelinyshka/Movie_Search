@@ -29,6 +29,7 @@ form {
 		& input.input-movie {
 			width: 300px;
 			padding-left: 40px;
+			padding-right: 75px;
 			}
 	}
 
@@ -156,7 +157,7 @@ button.with-cross {
 
 #load-icon {
 	position: absolute;
-	top: 36px;
+	top: 0px;
 	right: 0;
 	left: 0;
 	}
