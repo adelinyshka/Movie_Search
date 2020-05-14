@@ -105,17 +105,25 @@ async function translateAllToEng(input) {
 			}
 		})
 		.catch((error) => {
-			console.log(error)
+			console.log(error);
 			elMessage.textContent = `Ошибка: ${error}`;
 		})
 }
 
+const formMovie = document.querySelector('#searchMovieForm');
 
-// const input = document.querySelector('#movie-input');
-// input.addEventListener('keyup', function (e) {
-// 	if(e.key === 'Enter'){
-// 		console.log('yes')
-//
-// 	}
-// })
-// keyboard.addEventListener('')
+document.addEventListener('keydown', function(e){
+	e.preventDefault();
+	if (e.keyCode === 13) {
+		const userInput = elSearchInput.value;
+		if (userInput.length < 3) {
+			elMessage.textContent = 'Введите минимум 3 символа';
+		} else {
+			elMessage.textContent = `Looking for ... ${userInput}`;
+			translateAllToEng(userInput);
+		}
+		elSearchInput.focus();
+	}
+});
+
+export {translateAllToEng}

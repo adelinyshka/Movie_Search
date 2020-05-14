@@ -11,6 +11,7 @@ import {
 	Spinner
 } from 'spin.js';
 import mySwiper from './slider-swiper';
+import {Keyboard} from './keyboard';
 
 //todo вместо не загруженных картинок - сделать картнку по умолчанию
 //todo поиск по вводу с клавы
@@ -38,6 +39,7 @@ var opts = {
 };
 
 
+
 	let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
 	elSearchInput.focus();
 
@@ -61,11 +63,6 @@ var opts = {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			console.log(error)
 		});
-
-
-// document.onload =() => {
-// 	showDefaultMovies(1);
-// }
 
 function pushRateToMovie(data) {
 	let x = document.querySelector(`#${data.imdbID}`);
@@ -99,11 +96,15 @@ async function parseData(data) {
 			movieCard.classList.add('movie-card', 'swiper-slide');
 
 			movieCard.innerHTML = `
-			<h5 class="movie-title" tabindex="0" ><a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a></h5>
+		
+		<div class="movie-year" tabindex="0" >${year}</div>
 			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
-			<div class="movie-year" tabindex="0" >${year}</div>
-			<div class = "movie-rate" tabindex="0" id="${id}">
-			</div>
+			
+				<div class = "movie-rate" tabindex="0" id="${id}"></div>
+						<h5 class="movie-title" tabindex="0" >
+			<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a></h5>
+			
+			
 		`;
 			cardWrapper.append(movieCard);
 		}
@@ -131,11 +132,14 @@ async function addNewMovies(data) {
 			movieCard.classList.add('movie-card', 'swiper-slide');
 
 			movieCard.innerHTML = `
-			<h5 class="movie-title" tabindex="0" ><a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a></h5>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
+				
 			<div class="movie-year" tabindex="0" >${year}</div>
-			<div class = "movie-rate" tabindex="0" id="${id}">
-			</div>
+			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
+			<div class = "movie-rate" tabindex="0" id="${id}"></div>
+			
+			<h5 class="movie-title" tabindex="0" >
+				<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
+			</h5>	
 		`;
 			cardWrapper.append(movieCard);
 		}
@@ -172,7 +176,6 @@ function makeResults() {
 
 			if (response.ok) {
 				return response.json();
-				console.log(response)
 			}
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			throw new Error(`${response.status}: ${response.statusText}`);
@@ -187,20 +190,17 @@ function makeResults() {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			console.log(error)
 		});
-
 }
-
 
 mySwiper.on('reachEnd', async () => {
 	makeResults();
 	page++;
-
 });
-mySwiper.updateSlidesClasses();
-mySwiper.updateSlides();
-mySwiper.allowSlideNext
 
-
+const cross = document.querySelector('.with-cross');
+cross.addEventListener('click',function (e) {
+	e.preventDefault();
+});
 
 
 

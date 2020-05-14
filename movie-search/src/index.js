@@ -14,4 +14,5 @@ import './app/app';
 import './app/movie';
 import './app/paginator';
 import './app/state';
+import './app/keyboard';
 

@@ -18,6 +18,7 @@ h1 {
 	}
 
 form {
+	position: relative;
 	text-align: center;
 	padding: 20px 0;
 
@@ -60,19 +61,18 @@ img.movie-pic {
 	&:hover,
 	&:focus,
 	&:active {
-		transform: scale(1.2);
+		transform: scale(1.02);
 		}
 	}
 
 h5.movie-title {
-	height: 82px;
 	overflow-y: hidden;
 	width: 200px;
 	text-align: center;
 
-
 	& a {
 		color: white;
+		font-size: 16px;
 		&:hover,
 		&:focus,
 		&:active {
@@ -111,9 +111,10 @@ button.with-keyboard {
 	}
 
 button.with-cross {
+	position:absolute;
+	top: 3px;
+	right: 70px;
 	color: transparent;
-	top: 0;
-	right: -1px;
 	outline: none;
 
 	& svg {
@@ -191,12 +192,8 @@ button.with-cross {
 		}
 	}
 
-.swiper-container {
-	height:480px;
-	}
-
 .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
-	bottom: 15px;
+	bottom: 0;
 	}
 
 #message {

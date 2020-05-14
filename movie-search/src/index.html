@@ -33,7 +33,7 @@
 			</div>
 			<div class="col-12 mt-3">
 
-				<form class="text-center">
+				<form id="searchMovieForm" class="text-center">
 					<div class="form-group">
 						<label>
 							<i class="fas fa-search fa-lg"
@@ -43,22 +43,22 @@
 							       placeholder="Search movie"
 							       autofocus tabindex="0" autocomplete="off"
 							       minlength="3">
-<!--							<button class="with-cross">-->
-								<svg style="position:absolute; top: 4px; right: 50px"
-								     id="icon-clear" class="bi bi-x" width="2em"
+							<button class="with-cross">
+								<svg id="icon-clear" class="bi bi-x" width="2em"
 								     height="2em"
 								     viewBox="0 0 16 16" fill="grey"
 								     xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
 									<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
 								</svg>
-<!--							</button>-->
+							</button>
 
 
-<!--							<button class="with-keyboard">-->
-								<i class="fas fa-keyboard fa-2x" style="position:absolute;
+							<button class="with-keyboard">
+								<i id="keyboardIcon" class="fas fa-keyboard fa-2x"
+								   style="position:absolute;
 							top:4px; right: 10px"></i>
-<!--							</button>-->
+							</button>
 						</label>
 
 						<button class="btn-search" id="buttonSearch" tabindex="0" >Search</button>
@@ -90,9 +90,6 @@
 		</div>
 	</div>
 </main>
-
-
-
 
 <footer role="footer">
 	<a class="telegram-link p-3"
