@@ -1,37 +1,36 @@
 import {
-	apikey, cardWrapper,
+	apikey, cardWrapper,btnSearch,
 	elIconClear, elLoadIcon,
 	elMessage,
 	elSearchBtn,
 	elSearchInput,
 } from "./consts";
 import {Spinner} from "spin.js";
-import {opts, parseData, getMoviesIds} from './api';
+import {opts} from './api';
 import keyboard from "swiper/src/components/keyboard/keyboard";
+import {clearUserMessage,clearInput,startSpinnerPreloader,endSpinnerPreloader,pushRateToMovie,parseData,addNewMovies,getMoviesIds,clearMovieData,makeResults} from './working-functions';
 
-const btnSearch = document.querySelector('#buttonSearch');
-elMessage.textContent = '';
-elSearchInput.focus();
-
+clearInput();
+let userMessage = elMessage.textContent;
 elSearchBtn.addEventListener('click', function (e) {
 	e.preventDefault();
-	elMessage.textContent = '';
+	startSpinnerPreloader();
 
 	const userInput = elSearchInput.value;
 	if (userInput.length < 3) {
-		elMessage.textContent = 'Введите минимум 3 символа';
+		userMessage = 'Введите минимум 3 символа';
 	} else {
-		elMessage.textContent = `Looking for ... ${userInput}`;
+		userMessage = `Looking for ... ${userInput}`;
 		translateAllToEng(userInput);
 	}
 	elSearchInput.focus();
 });
 
-elIconClear.addEventListener('click', function (e) {
-	// e.preventDefault();
-	elMessage.textContent = '';
-	elSearchInput.value = '';
-});
+// elIconClear.addEventListener('click', function (e) {
+// 	// e.preventDefault();
+// 	clearUserMessage();
+// 	clearInput();
+// });
 
 
 function callRate(userInput) {
@@ -59,12 +58,12 @@ function callApi(url) {
 			if (response.ok) {
 				return response.json();
 			}
-			console.log('oops')
-			elMessage.textContent = `No result found for ... ${userInput}`;
+			// console.log('oops')
+			userMessage = `No result found for ... ${userInput}`;
 		})
 		.then(data => {
 			if(data.Response === 'False') {
-				elMessage.textContent = `No result found for ... ${userInput}`;
+				userMessage = `No result found for ... ${userInput}`;
 			}
 			else {
 				parseData(data);
@@ -72,7 +71,7 @@ function callApi(url) {
 		})
 		.catch((error) => {
 			console.log(error)
-			elMessage.textContent = `Ошибка: ${error}`;
+			userMessage = `Ошибка: ${error}`;
 		});
 }
 
@@ -95,36 +94,38 @@ async function translateAllToEng(input) {
 		.then(data => {
 			if (data.code !== 200) {
 				console.log(data.code)
-				elMessage.textContent = `No results were found for … ${input}`;
+				userMessage = `No results were found for … ${input}`;
 			} else {
 				let urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}`;
 				callApi(urlToSendToApi);
 				callRate(data.text);
 				btnSearch.textContent = 'Search';
-				elMessage.textContent = `Showing results for ... ${data.text}`;
+				userMessage = `Showing results for ... ${data.text}`;
 			}
 		})
 		.catch((error) => {
 			console.log(error);
-			elMessage.textContent = `Ошибка: ${error}`;
+			userMessage = `Ошибка: ${error}`;
 		})
 }
 
-const formMovie = document.querySelector('#searchMovieForm');
-
-document.addEventListener('keydown', function(e){
-	e.preventDefault();
-	if (e.keyCode === 13) {
-		const userInput = elSearchInput.value;
-		if (userInput.length < 3) {
-			elMessage.textContent = 'Введите минимум 3 символа';
-		} else {
-			elMessage.textContent = `Looking for ... ${userInput}`;
-			translateAllToEng(userInput);
-		}
-		elSearchInput.focus();
-	}
-
-});
+// const formMovie = document.querySelector('#searchMovieForm');
+//
+// document.addEventListener('keydown', function(e){
+// 	e.preventDefault();
+// 	if (e.keyCode === 13) {
+// 		const userInput = elSearchInput.value;
+// 		if (userInput.length < 3) {
+// 			userMessage = 'Введите минимум 3 символа';
+// 		} else {
+// 			userMessage = `Looking for ... ${userInput}`;
+// 			translateAllToEng(userInput);
+// 		}
+// 		elSearchInput.focus();
+// 	}
+// 	if(e.keyCode === 27) {
+// 		elSearchInput.focus();
+// 	}
+// });
 
 export {translateAllToEng}

@@ -14,10 +14,11 @@
 	z-index: 2;
 	border-radius: .25rem;
 	width: 768px;
-
+	position: absolute;
 	left: 0;
 	right: 0;
 	margin: auto;
+	box-shadow: 5px 4px 5px #fe5e5e;
 	}
 
 @media (max-width: 799px) {

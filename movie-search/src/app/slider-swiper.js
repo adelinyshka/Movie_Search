@@ -10,8 +10,9 @@ var swiper = new Swiper('.swiper-container', {
 	preloadImages:true,
 	slidesPerGroup: 1,
 	observer: true,
-	observeParents: true,
-	observeSlideChildren: true,
+	// initialSlide: 0,
+	// observeParents: true,
+	// observeSlideChildren: true,
 	// watchSlidesVisibility: true,
 	watchState: true,
 	watchSlidesProgress: true,
@@ -56,6 +57,5 @@ const mySwiper = document.querySelector('.swiper-container').swiper
 
 mySwiper.init();
 mySwiper.slideTo(0);
-
 
 export default mySwiper;
