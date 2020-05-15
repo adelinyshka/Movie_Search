@@ -109,7 +109,7 @@ class Keyboard {
 					key.classList.add('special_key');
 				}
 				 if(item === 91) {
-					key.classList.add('lang-key');
+					key.classList.add('key','lang-key');
 				}
 				else {
 					key.classList.add('key');
