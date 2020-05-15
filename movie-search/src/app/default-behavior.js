@@ -20,6 +20,7 @@ import {
 import {mySwiper} from "./slider-swiper";
 
 document.addEventListener("DOMContentLoaded", function(event) {
+	console.log('load default');
 
 	let userMessage = elMessage.textContent;
 
@@ -35,21 +36,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 		})
 		.then((moviesData) => {
-			// console.log('parse on load!');
+			console.log('parse on load!');
 			parseData(moviesData);
 		})
 		.catch((error) => {
 			elMessage.textContent = `${error}`;
 		});
 
+});
 
-	mySwiper.on('reachEnd', async () => {
-		// console.log('reach end');
-		makeResultsDefault();
-	});
+mySwiper.on('reachEnd', async () => {
+
+	console.log('reach end');
+	makeResultsDefault();
 
 });
 
-
-
-
+// const x = makeResultsDefault();
+//
+// mySwiper.appendSlide(x);

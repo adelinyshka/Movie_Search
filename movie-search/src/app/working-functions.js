@@ -11,11 +11,11 @@ import {Spinner} from "spin.js";
 let userMessage = elMessage.textContent;
 
 let arrOfIds = [];
-let page = 2;
+
 
 async function parseData(data) {
 	clearMovieData();
-	// console.log('parseData on default'+data);
+	console.log('parseData on default' + data);
 
 	for await (let i of data.Search) {
 		let title = i.Title;
@@ -41,21 +41,18 @@ async function parseData(data) {
 				</h5>
 		`;
 			cardWrapper.append(movieCard);
-			// mySwiper.slideTo(0);
-
 		}
 		mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
 		mySwiper.navigation.update();
-
-		// mySwiper.update();
 	}
 	getMoviesIds(arrOfIds);
 	endSpinnerPreloader();
+
 }
 
 async function parseDataOnSearch(data) {
 	clearMovieData();
-	// console.log('parseData On Search'+data);
+	console.log('parse data On Search' + data);
 
 	for await (let i of data.Search) {
 		let title = i.Title;
@@ -81,18 +78,12 @@ async function parseDataOnSearch(data) {
 				</h5>
 		`;
 			cardWrapper.append(movieCard);
-			// mySwiper.slideTo(0);
-
 		}
 		mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
 		mySwiper.navigation.update();
-		// mySwiper.slideTo(mySwiper.slides.length - 10);
-
-		// mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
-		// mySwiper.navigation.update();
-		// mySwiper.update();
 	}
 	getMoviesIds(arrOfIds);
+
 	endSpinnerPreloader();
 }
 
@@ -104,15 +95,14 @@ function pushRateToMovie(data) {
 		imdbIDRate.innerHTML = `<i class="fa fa-star fa-sm text-warning" 
 		aria-hidden="true"></i>
 		${data.imdbRating}`;
-	}
-	else {
+	} else {
 		return;
 	}
 }
 
 async function addNewMovies(data) {
 	// console.log('add mew movies');
-	// console.log('addNewMovies'+data);
+	console.log('add New Movies' + data);
 	mySwiper.isEnd = false;
 
 	for await (let i of data.Search) {
@@ -149,7 +139,7 @@ async function addNewMovies(data) {
 
 
 async function getMoviesIds(arrOfIds) {
-	// console.log('get movies ids')
+	console.log('get movies ids');
 	for (let i of arrOfIds) {
 		let url = `https://www.omdbapi.com/?i=${i}&apikey=${apikey}`;
 		fetch(url)
@@ -158,19 +148,22 @@ async function getMoviesIds(arrOfIds) {
 				pushRateToMovie(data);
 			})
 			.catch(err => {
-				// console.log(err);
+				console.log(err);
 			})
 	}
+
 }
 
 function clearMovieData() {
 	mySwiper.removeAllSlides();
 	cardWrapper.innerHTML = '';
-	// console.log('i clear movie data')
+	console.log('i clear movie data')
 }
 
+let page = 2;
+
 function makeResultsDefault() {
-	// console.log('make results with default results');
+	console.log('make results with default results');
 	let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=${page}`;
 	startSpinnerPreloader();
 	fetch(targetUrl)
@@ -185,11 +178,11 @@ function makeResultsDefault() {
 
 			addNewMovies(moviesData);
 			endSpinnerPreloader();
-			// console.log(mySwiper.slides.length)
+			console.log(mySwiper.slides.length)
 		})
 		.catch((error) => {
 			elMessage.textContent = `Ошибка: ${error}`;
-			// console.log(error)
+			console.log(error)
 		});
 	page++;
 }
@@ -211,6 +204,7 @@ function clearUserMessage() {
 }
 
 function callRate(userInput) {
+	console.log('call rate of input:' + userInput);
 
 	const requestWord = fetch(`https://www.omdbapi.com/?s=${userInput}&apikey=${apikey}&page=1`);
 
@@ -225,12 +219,12 @@ function callRate(userInput) {
 		})
 		.catch((error) => {
 			elMessage.textContent = `Ошибка: ${error}`;
-			// console.log(error)
+			console.log(error)
 		});
 }
 
-function callApi(url) {
-	// console.log('call api')
+async function callApi(url) {
+	console.log('fetch movie api');
 	let userInput = elSearchInput.value;
 
 	fetch(url)
@@ -238,26 +232,25 @@ function callApi(url) {
 			if (response.ok) {
 				return response.json();
 			}
-			// console.log('oops')
 			userMessage = `No result found for ${userInput}`;
 		})
 		.then(data => {
-			if(data.Response === 'False') {
+			console.log('inside call Api' + data);
+			if (data.Response === 'False') {
 				userMessage = `No result found for ${userInput}`;
-			}
-			else {
-
+			} else {
 				parseDataOnSearch(data);
 			}
 		})
 		.catch((error) => {
-			// console.log(error)
+			console.log(error);
 			userMessage = `Ошибка: ${error}`;
 		});
 }
 
 
 async function translateAllToEng(input) {
+	console.log('start func translateAllToEng with input: ' + input);
 	// var spinner = new Spinner(opts).spin(elLoadIcon);
 	btnSearch.textContent = 'Searching';
 	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
@@ -271,23 +264,54 @@ async function translateAllToEng(input) {
 	fetch(url)
 		.then(res => res.json())
 		.then(data => {
+			console.log(data.text)
 			if (data.code !== 200) {
-				// console.log(data.code)
-				userMessage = `No results were found for ${input} and server response is ${data.code}`;
+				userMessage = `No results were found for ${data.text}`;
 			} else {
-				// console.log('word is translated');
+				clearMovieData();
+
+				console.log('word is translated');
 				let urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}`;
 				callApi(urlToSendToApi);
+				userMessage = `Showing results for ${data.text}`;
 				callRate(data.text);
 				btnSearch.textContent = 'Search';
 			}
+
 		})
 		.catch((error) => {
-			// console.log(error);
+			console.log(error);
 			userMessage = `Ошибка: ${error}`;
 		})
 
 }
+
+
+function makeResultsSearch(input) {
+	console.log('make results with SEARCH results');
+	let targetUrl = `https://www.omdbapi.com/?s=${input}&apikey=${apikey}&page=${page}`;
+	startSpinnerPreloader();
+	fetch(targetUrl)
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+			userMessage = `Error:${response.status}: ${response.statusText}`;
+			throw new Error(`${response.status}: ${response.statusText}`);
+		})
+		.then((moviesData) => {
+
+			addNewMovies(moviesData);
+			endSpinnerPreloader();
+			console.log(mySwiper.slides.length)
+		})
+		.catch((error) => {
+			elMessage.textContent = `Ошибка: ${error}`;
+			console.log(error)
+		});
+	page++;
+}
+
 
 export {
 	translateAllToEng,

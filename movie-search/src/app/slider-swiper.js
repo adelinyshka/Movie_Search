@@ -36,7 +36,7 @@ var swiper = new Swiper('.swiper-container', {
 		},
 		1040: {
 			slidesPerView: 4,
-			spaceBetween: 40,
+			spaceBetween: 30,
 			slidesPerGroup: 1
 		}
 	},
@@ -45,6 +45,7 @@ var swiper = new Swiper('.swiper-container', {
 		type: 'bullets',
 		clickable: true,
 		dynamicBullets: true,
+		dynamicMainBullets: 5
 	},
 	navigation: {
 		nextEl: '.swiper-button-next',

@@ -249,17 +249,34 @@ class Keyboard {
 		if (checker === 'ControlLeft' || checker === 'ControlRight') {
 			this.ctrl = true;
 		}
-		if (checker === 'LANG') {
+
+		if (((checker === 'AltLeft' || checker === 'AltRight')   && this.ctrl) || (checker === 'LANG')) {
 			if (localStorage.getItem('language') === 'en') {
+				this.ctrl = false;
 				localStorage.setItem('language', 'ru');
 				this.language = localStorage.getItem('language');
 				this.LangCaseKb();
+
 			} else {
+				this.ctrl = false;
 				localStorage.setItem('language', 'en');
 				this.language = localStorage.getItem('language');
 				this.LangCaseKb();
 			}
 		}
+
+
+		// if (checker === 'LANG') {
+		// 	if (localStorage.getItem('language') === 'en') {
+		// 		localStorage.setItem('language', 'ru');
+		// 		this.language = localStorage.getItem('language');
+		// 		this.LangCaseKb();
+		// 	} else {
+		// 		localStorage.setItem('language', 'en');
+		// 		this.language = localStorage.getItem('language');
+		// 		this.LangCaseKb();
+		// 	}
+		// }
 	}
 
 
@@ -601,6 +618,7 @@ window.onload = function () {
 
 
 btnKb.addEventListener('click', function (e) {
+	console.log('keyboard')
 	e.preventDefault();
 	const kbWrapper = document.querySelector('.keyboard-wrapper');
 	kbWrapper.classList.toggle('d-none');
