@@ -31,7 +31,7 @@ class Keyboard {
 		formMovie.append(this.keyboardWrapper);
 
 		this.title = document.createElement('div');
-		this.title.classList.add('text-center');
+		this.title.classList.add('text-center','kb-title');
 		this.title.style.color = 'white';
 		this.title.style.fontSize = '12px';
 		this.title.innerText = 'Смена языка: левый Ctrl + Alt';
