@@ -29,16 +29,19 @@ async function parseData(data) {
 		} else {
 			poster = i.Poster;
 			let movieCard = document.createElement('div');
-			movieCard.classList.add('movie-card', 'swiper-slide');
+			movieCard.classList.add( 'swiper-slide');
 
 			movieCard.innerHTML = `
-			<div class="movie-year" tabindex="0" >${year}</div>
+<div class = 'movie-card'>
+<div class = "movie-rate" tabindex="0" id="${id}"></div>
+			
 			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
-				<div class = "movie-rate" tabindex="0" id="${id}"></div>
 				
+				<div class="movie-year" tabindex="0" >${year}</div>
 				<h5 class="movie-title" tabindex="0" >
 					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
 				</h5>
+				</div>
 		`;
 			cardWrapper.append(movieCard);
 		}
@@ -66,16 +69,17 @@ async function parseDataOnSearch(data) {
 		} else {
 			poster = i.Poster;
 			let movieCard = document.createElement('div');
-			movieCard.classList.add('movie-card', 'swiper-slide');
+			movieCard.classList.add( 'swiper-slide');
 
 			movieCard.innerHTML = `
-			<div class="movie-year" tabindex="0" >${year}</div>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
+<div class = 'movie-card'>
 				<div class = "movie-rate" tabindex="0" id="${id}"></div>
-				
+			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
+				<div class="movie-year" tabindex="0" >${year}</div>
 				<h5 class="movie-title" tabindex="0" >
 					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
 				</h5>
+				</div>
 		`;
 			cardWrapper.append(movieCard);
 		}
@@ -118,15 +122,17 @@ async function addNewMovies(data) {
 		} else {
 			poster = i.Poster;
 			let movieCard = document.createElement('div');
-			movieCard.classList.add('movie-card', 'swiper-slide');
+			movieCard.classList.add( 'swiper-slide');
 
 			movieCard.innerHTML = `
-			<div class="movie-year" tabindex="0" >${year}</div>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0" ">
+<div class = 'movie-card'>
 			<div class = "movie-rate" tabindex="0" id="${id}"></div>
-			<h5 class="movie-title" tabindex="0" >
-				<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
-			</h5>	
+			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
+				<div class="movie-year" tabindex="0" >${year}</div>
+				<h5 class="movie-title" tabindex="0" >
+					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
+				</h5>
+			</div>
 		`;
 			cardWrapper.append(movieCard);
 			//todo better use swiper.appendSlide

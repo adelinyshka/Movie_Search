@@ -68,12 +68,14 @@ img.movie-pic {
 
 h5.movie-title {
 	overflow-y: hidden;
-	width: 200px;
 	text-align: center;
+	margin: 0 5px;
 
 	& a {
 		color: white;
 		font-size: 16px;
+		display: inline;
+		vertical-align: middle;
 		&:hover,
 		&:focus,
 		&:active {
@@ -131,12 +133,18 @@ button.with-cross {
 
 .movie-rate {
 	color: white;
+	padding: 10px;
 	}
 
 .movie-card {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 90%;
+	margin: 30px auto;
+	background: #1b1e21;
+	border-radius: 8px;
+	height: 504px;
 	}
 
 #icon-clear.hidden {
@@ -206,6 +214,7 @@ button.with-cross {
 
 .movie-year {
 	color: white;
+	padding-top: 10px;
 	}
 
 .swiper-button-next:after,
@@ -213,6 +222,7 @@ button.with-cross {
 	position: absolute;
 	right: -11px;
 	font-size: 31px;
+	top: -55px;
 	}
 
 .swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
@@ -220,6 +230,7 @@ button.with-cross {
 	position: absolute;
 	left: -10px;
 	font-size: 31px;
+	top: -55px;
 	}
 
 .swiper-pagination-bullet-active {
@@ -227,9 +238,21 @@ button.with-cross {
 	}
 
 .swiper-pagination-bullet {
-	background: #690101;
+	background: #c04949;
 	//opacity: .2;
 	width: 12px;
 	height: 12px;
 	margin: 0 10px;
+	}
+
+//h5 {
+//	margin-bottom: 2.5rem;
+//	}
+
+.swiper-container-android .swiper-slide, .swiper-wrapper {
+	transform: translateZ(0);
+	}
+.swiper-wrapper {
+	position: relative;
+	width: 100%;
 	}
