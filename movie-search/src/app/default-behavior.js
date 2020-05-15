@@ -1,28 +1,55 @@
-import {apikey, elLoadIcon, elMessage, elSearchInput,btnSearch} from "./consts";
-import {Spinner} from "spin.js";
-import {opts} from "./api";
-import {clearUserMessage,clearInput,startSpinnerPreloader,endSpinnerPreloader,pushRateToMovie,parseData,addNewMovies,getMoviesIds,clearMovieData,makeResults} from './working-functions';
-import mySwiper from "./slider-swiper";
+import {
+	apikey,
+	elLoadIcon,
+	elMessage,
+	elSearchInput,
+	btnSearch
+} from "./consts";
+import {
+	clearUserMessage,
+	clearInput,
+	startSpinnerPreloader,
+	endSpinnerPreloader,
+	pushRateToMovie,
+	parseData,
+	addNewMovies,
+	getMoviesIds,
+	clearMovieData,
+	makeResultsDefault
+} from './working-functions';
+import {mySwiper} from "./slider-swiper";
 
-let userMessage = elMessage.textContent;
+document.addEventListener("DOMContentLoaded", function(event) {
 
-let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
+	let userMessage = elMessage.textContent;
 
-const requestDefaultMovies = fetch(targetUrl);
+	const targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
+	const requestDefaultMovies = fetch(targetUrl);
 
-startSpinnerPreloader();
+	startSpinnerPreloader();
+	requestDefaultMovies
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
+		})
+		.then((moviesData) => {
+			// console.log('parse on load!');
+			parseData(moviesData);
+		})
+		.catch((error) => {
+			elMessage.textContent = `${error}`;
+		});
 
-requestDefaultMovies
-	.then((response) => {
-		if (response.ok) {
-			return response.json();
-		}
-		userMessage = `Error:${response.status}: ${response.statusText}`;
-	})
-	.then((moviesData) => {
-		clearMovieData();
-		parseData(moviesData);
-	})
-	.catch((error) => {
-		userMessage = `${error}`;
+
+	mySwiper.on('reachEnd', async () => {
+		// console.log('reach end');
+		makeResultsDefault();
 	});
+
+});
+
+
+
+

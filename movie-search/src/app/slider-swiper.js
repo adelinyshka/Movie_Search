@@ -1,6 +1,5 @@
 import Swiper from 'swiper';
 
-
 var swiper = new Swiper('.swiper-container', {
 	keyboardControl: true,
 	updateOnWindowResize: true,
@@ -13,7 +12,7 @@ var swiper = new Swiper('.swiper-container', {
 	// initialSlide: 0,
 	// observeParents: true,
 	// observeSlideChildren: true,
-	// watchSlidesVisibility: true,
+	watchSlidesVisibility: true,
 	watchState: true,
 	watchSlidesProgress: true,
 	grabCursor: true,
@@ -25,12 +24,12 @@ var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 20,
 			slidesPerGroup: 1
 		},
-		538: {
+		690: {
 			slidesPerView: 2,
 			spaceBetween: 30,
 			slidesPerGroup: 1
 		},
-		799: {
+		970: {
 			slidesPerView: 3,
 			spaceBetween: 30,
 			slidesPerGroup: 1
@@ -53,9 +52,30 @@ var swiper = new Swiper('.swiper-container', {
 	},
 });
 
+var opts = {
+	lines: 18, // The number of lines to draw
+	length: 5, // The length of each line
+	width: 2, // The line thickness
+	radius: 10, // The radius of the inner circle
+	scale: 1, // Scales overall size of the spinner
+	corners: 1, // Corner roundness (0..1)
+	color: 'white', // CSS color or array of colors
+	fadeColor: 'transparent', // CSS color or array of colors
+	speed: 0.5, // Rounds per second
+	rotate: 0, // The rotation offset
+	animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
+	direction: 1, // 1: clockwise, -1: counterclockwise
+	zIndex: 2e9, // The z-index (defaults to 2000000000)
+	className: 'spinner', // The CSS class to assign to the spinner
+	top: '50%', // Top position relative to parent
+	left: '50%', // Left position relative to parent
+	shadow: '0 0 1px transparent', // Box-shadow for the lines
+	position: 'absolute', // Element positioning
+};
+
 const mySwiper = document.querySelector('.swiper-container').swiper
 
-mySwiper.init();
-mySwiper.slideTo(0);
+// mySwiper.init();
+// mySwiper.slideTo(0);
 
-export default mySwiper;
+export {mySwiper, opts};

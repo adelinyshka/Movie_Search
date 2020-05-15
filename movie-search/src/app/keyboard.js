@@ -1,6 +1,5 @@
 import {elMessage, elSearchInput} from "./consts";
-import {translateAllToEng} from './app';
-
+import {translateAllToEng} from './working-functions';
 const formMovie = document.querySelector('#searchMovieForm');
 
 class Keyboard {
@@ -23,7 +22,7 @@ class Keyboard {
 
 //textarea
 		this.textarea = document.querySelector('#movie-input');
-		this.textarea.setAttribute('autofocus', '');
+		this.textarea.setAttribute('autofocus', 'autofocus');
 
 //kb wrapper
 		this.keyboardWrapper = document.createElement('div');
@@ -108,7 +107,11 @@ class Keyboard {
 			} else if (index >= 55 && index <= 63) {
 				if (item === 17 || item === 91 || item === 18 || item === 32 || item === 37 || item === 40 || item === 39) {
 					key.classList.add('special_key');
-				} else {
+				}
+				 if(item === 91) {
+					key.classList.add('lang-key');
+				}
+				else {
 					key.classList.add('key');
 				}
 				this.row5.append(key);
@@ -246,15 +249,12 @@ class Keyboard {
 		if (checker === 'ControlLeft' || checker === 'ControlRight') {
 			this.ctrl = true;
 		}
-		if ((checker === 'AltLeft' || checker === 'AltRight') && this.ctrl) {
+		if (checker === 'LANG') {
 			if (localStorage.getItem('language') === 'en') {
-				this.ctrl = false;
 				localStorage.setItem('language', 'ru');
 				this.language = localStorage.getItem('language');
 				this.LangCaseKb();
-
 			} else {
-				this.ctrl = false;
 				localStorage.setItem('language', 'en');
 				this.language = localStorage.getItem('language');
 				this.LangCaseKb();
@@ -364,7 +364,7 @@ class Keyboard {
 			if (userInput.length < 3) {
 				elMessage.textContent = 'Введите минимум 3 символа';
 			} else {
-				elMessage.textContent = `Looking for ... ${userInput}`;
+				elMessage.textContent = `Looking for ${userInput}`;
 				translateAllToEng(userInput);
 			}
 			elSearchInput.focus();
@@ -615,11 +615,11 @@ const keyWhich = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187, 8,
 	17, 91, 18, 32, 18, 37, 40, 39, 17
 ];
 
-const keysFunction = ["Backspace",
+const keysFunction = ["&#8656;",
 	"Tab", "Delete",
 	"CapsLock", "Enter",
-	"Shift", "▲", "Shift",
-	"Ctrl", "Win", "Alt", "", "Alt", "◄", "▼", "►", "Ctrl"
+	"Shift", " &#9650;", "Shift",
+	"Ctrl", "LANG", "Alt", "", "Alt", " &#9664;", " &#9660;", " &#9654;", "Ctrl"
 ];
 
 
@@ -853,7 +853,7 @@ const keyCodeFunct = ["Backspace",
 	"Tab", "Delete",
 	"CapsLock", "Enter",
 	"ShiftLeft", "ArrowUp", "ShiftRight",
-	"ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
+	"ControlLeft", "LANG", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
 ];
 
 const keyCodeLetterRu = ["Backquote",
@@ -871,7 +871,7 @@ const keyCodes = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5",
 	"Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Delete",
 	"CapsLock", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote", "Enter",
 	"ShiftLeft", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ArrowUp", "ShiftRight",
-	"ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
+	"ControlLeft", "LANG", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"
 ];
 
 export {Keyboard};

@@ -207,3 +207,17 @@ button.with-cross {
 .movie-year {
 	color: white;
 	}
+
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+	position: absolute;
+	right: -11px;
+	font-size: 31px;
+	}
+
+.swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
+	content: 'prev';
+	position: absolute;
+	left: -10px;
+	font-size: 31px;
+	}

@@ -18,7 +18,6 @@
 	left: 0;
 	right: 0;
 	margin: auto;
-	box-shadow: 5px 4px 5px #fe5e5e;
 	}
 
 @media (max-width: 799px) {
@@ -47,7 +46,7 @@
 	color: #fff;
 	background: #08554c;
 	margin: 2px;
-	box-shadow: 5px 4px 0px #278d83, inset -6px -5px 10px #2a4534, inset 6px 5px 10px #589384;
+	//box-shadow: 5px 4px 0px #278d83, inset -6px -5px 10px #2a4534, inset 6px 5px 10px #589384;
 	border: 1px solid #2e302f;
 	border-radius: 9px;
 	vertical-align: top;
@@ -76,7 +75,7 @@
 	color: #fff;
 	background: #08554c;
 	margin: 2px;
-	box-shadow: 5px 4px 0px #278d83, inset -6px -5px 10px #2a4534, inset 6px 5px 10px #589384;
+	//box-shadow: 5px 4px 0px #278d83, inset -6px -5px 10px #2a4534, inset 6px 5px 10px #589384;
 	border: 1px solid #2e302f;
 	border-radius: 9px;
 	vertical-align: top;
@@ -137,4 +136,11 @@
 .special_key[data-code='ArrowUp'] {
 	max-width: 120px;
 	width: 8%;
+	}
+
+.lang-key {
+	background: #fe5e5e;
+	color: black;
+	font-weight: bold;
+	padding: 7px;
 	}
