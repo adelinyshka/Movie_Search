@@ -258,10 +258,8 @@ function callApi(url) {
 
 
 async function translateAllToEng(input) {
-
 	// var spinner = new Spinner(opts).spin(elLoadIcon);
 	btnSearch.textContent = 'Searching';
-
 	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
 	let url = `https://translate.yandex.net/api/v1.5/tr.json/translate
 ?key=${yaApi}
@@ -279,11 +277,9 @@ async function translateAllToEng(input) {
 			} else {
 				// console.log('word is translated');
 				let urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}`;
-
 				callApi(urlToSendToApi);
 				callRate(data.text);
 				btnSearch.textContent = 'Search';
-
 			}
 		})
 		.catch((error) => {

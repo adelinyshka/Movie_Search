@@ -75,7 +75,7 @@ var opts = {
 
 const mySwiper = document.querySelector('.swiper-container').swiper
 
-// mySwiper.init();
-// mySwiper.slideTo(0);
+mySwiper.init();
+mySwiper.slideTo(0);
 
 export {mySwiper, opts};
