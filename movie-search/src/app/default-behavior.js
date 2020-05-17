@@ -13,16 +13,16 @@ import {
 	pushRateToMovie,
 	parseData,
 	addNewMovies,
-	getMoviesIds,
-	clearMovieData,
+	getRating,
+	clearCardWrapper,userInput,
 	makeResultsDefault
 } from './working-functions';
 import {mySwiper} from "./slider-swiper";
 
+elSearchInput.focus();
+
 document.addEventListener("DOMContentLoaded", function(event) {
 	console.log('load default');
-
-	let userMessage = elMessage.textContent;
 
 	const targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
 	const requestDefaultMovies = fetch(targetUrl);
@@ -44,14 +44,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 
 });
-
-mySwiper.on('reachEnd', async () => {
-
-	console.log('reach end');
-	makeResultsDefault();
-
-});
-
-// const x = makeResultsDefault();
-//
-// mySwiper.appendSlide(x);
+// функция подгружающая 2 результаты
+// mySwiper.on('reachEnd', async () => {
+// 	console.log('reach end');
+// 	makeResultsDefault();
+// });

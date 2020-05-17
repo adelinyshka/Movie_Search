@@ -1,5 +1,6 @@
 import {elMessage, elSearchInput} from "./consts";
 import {translateAllToEng} from './working-functions';
+
 const formMovie = document.querySelector('#searchMovieForm');
 
 class Keyboard {
@@ -26,12 +27,12 @@ class Keyboard {
 
 //kb wrapper
 		this.keyboardWrapper = document.createElement('div');
-		this.keyboardWrapper.classList.add('keyboard-wrapper','d-none');
+		this.keyboardWrapper.classList.add('keyboard-wrapper', 'd-none');
 		this.keyboardWrapper.setAttribute('data', 'wrap');
 		formMovie.append(this.keyboardWrapper);
 
 		this.title = document.createElement('div');
-		this.title.classList.add('text-center','kb-title');
+		this.title.classList.add('text-center', 'kb-title');
 		this.title.style.color = 'white';
 		this.title.style.fontSize = '12px';
 		this.title.innerText = 'Смена языка: левый Ctrl + Alt';
@@ -108,10 +109,9 @@ class Keyboard {
 				if (item === 17 || item === 91 || item === 18 || item === 32 || item === 37 || item === 40 || item === 39) {
 					key.classList.add('special_key');
 				}
-				 if(item === 91) {
-					key.classList.add('key','lang-key');
-				}
-				else {
+				if (item === 91) {
+					key.classList.add('key', 'lang-key');
+				} else {
 					key.classList.add('key');
 				}
 				this.row5.append(key);
@@ -250,7 +250,7 @@ class Keyboard {
 			this.ctrl = true;
 		}
 
-		if (((checker === 'AltLeft' || checker === 'AltRight')   && this.ctrl) || (checker === 'LANG')) {
+		if (((checker === 'AltLeft' || checker === 'AltRight') && this.ctrl) || (checker === 'LANG')) {
 			if (localStorage.getItem('language') === 'en') {
 				this.ctrl = false;
 				localStorage.setItem('language', 'ru');
@@ -282,7 +282,6 @@ class Keyboard {
 
 //textarea
 	printText(event) {
-
 
 
 		event.preventDefault();
@@ -625,7 +624,6 @@ btnKb.addEventListener('click', function (e) {
 });
 
 
-
 const keyWhich = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187, 8,
 	9, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 219, 221, 220, 46,
 	20, 65, 83, 68, 70, 71, 72, 74, 75, 76, 186, 222, 13,
@@ -639,7 +637,6 @@ const keysFunction = ["&#8656;",
 	"Shift", " &#9650;", "Shift",
 	"Ctrl", "LANG", "Alt", "", "Alt", " &#9664;", " &#9660;", " &#9654;", "Ctrl"
 ];
-
 
 const lettersEnglish = {
 	"KeyQ": 'q',
@@ -770,7 +767,6 @@ const lettersRussianCaps = {
 	"Comma": 'Б',
 	"Period": 'Ю',
 };
-
 
 const keyCodeSymbol = {
 	"Backquote": '`',

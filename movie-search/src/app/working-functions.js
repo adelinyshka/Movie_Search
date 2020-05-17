@@ -3,7 +3,7 @@ import {
 	cardWrapper,
 	elLoadIcon,
 	elMessage,
-	elSearchInput
+	elSearchInput, userInput
 } from "./consts";
 import {mySwiper, opts} from "./slider-swiper";
 import {Spinner} from "spin.js";
@@ -12,26 +12,25 @@ let userMessage = elMessage.textContent;
 
 let arrOfIds = [];
 
-
-async function parseData(data) {
-	clearMovieData();
-	console.log('parseData on default' + data);
+async function createCards(data) {
 
 	for await (let i of data.Search) {
 		let title = i.Title;
 		let year = i.Year;
 		let id = i.imdbID;
-		arrOfIds.push(id);
 		let poster;
+
+		arrOfIds.push(id);
 
 		if (i.Poster === 'N/A') {
 			poster = `../assets/img/noimage.gif`;
 		} else {
 			poster = i.Poster;
-			let movieCard = document.createElement('div');
-			movieCard.classList.add( 'swiper-slide');
+		}
+		let movieCard = document.createElement('div');
+		movieCard.classList.add('swiper-slide');
 
-			movieCard.innerHTML = `
+		movieCard.innerHTML = `
 <div class = 'movie-card'>
 <div class = "movie-rate" tabindex="0" id="${id}"></div>
 			
@@ -43,59 +42,25 @@ async function parseData(data) {
 				</h5>
 				</div>
 		`;
-			cardWrapper.append(movieCard);
-		}
-		mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
-		mySwiper.navigation.update();
+		cardWrapper.append(movieCard);
 	}
-	getMoviesIds(arrOfIds);
-	endSpinnerPreloader();
-
+	return arrOfIds;
 }
 
-async function parseDataOnSearch(data) {
-	clearMovieData();
-	console.log('parse data On Search' + data);
+async function parseData(data) {
+	console.log('parseData on default' + data);
+	clearCardWrapper();
+	await createCards(data);
+	mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
 
-	for await (let i of data.Search) {
-		let title = i.Title;
-		let year = i.Year;
-		let id = i.imdbID;
-		arrOfIds.push(id);
-		let poster;
-
-		if (i.Poster === 'N/A') {
-			poster = `../assets/img/noimage.gif`;
-		} else {
-			poster = i.Poster;
-			let movieCard = document.createElement('div');
-			movieCard.classList.add( 'swiper-slide');
-
-			movieCard.innerHTML = `
-<div class = 'movie-card'>
-				<div class = "movie-rate" tabindex="0" id="${id}"></div>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
-				<div class="movie-year" tabindex="0" >${year}</div>
-				<h5 class="movie-title" tabindex="0" >
-					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
-				</h5>
-				</div>
-		`;
-			cardWrapper.append(movieCard);
-		}
-		mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
-		mySwiper.navigation.update();
-	}
-	getMoviesIds(arrOfIds);
-
+	await getRating(arrOfIds);
 	endSpinnerPreloader();
 }
 
-
-function pushRateToMovie(data) {
+async function pushRateToMovie(data) {
 	// console.log('push rate to movie')
 	let imdbIDRate = document.querySelector(`#${data.imdbID}`);
-	if (imdbIDRate.id === data.imdbID) {
+	if (imdbIDRate.id === await data.imdbID) {
 		imdbIDRate.innerHTML = `<i class="fa fa-star fa-sm text-warning" 
 		aria-hidden="true"></i>
 		${data.imdbRating}`;
@@ -109,44 +74,16 @@ async function addNewMovies(data) {
 	console.log('add New Movies' + data);
 	mySwiper.isEnd = false;
 
-	for await (let i of data.Search) {
-		let title = i.Title;
-		let year = i.Year;
-		let id = i.imdbID;
+	await createCards(data);
 
-		arrOfIds.push(id);
-		let poster;
-
-		if (i.Poster === 'N/A') {
-			poster = `../assets/img/noimage.gif`;
-		} else {
-			poster = i.Poster;
-			let movieCard = document.createElement('div');
-			movieCard.classList.add( 'swiper-slide');
-
-			movieCard.innerHTML = `
-<div class = 'movie-card'>
-			<div class = "movie-rate" tabindex="0" id="${id}"></div>
-			<img class = "movie-pic" src="${poster}" alt="${title}  tabindex="0">
-				<div class="movie-year" tabindex="0" >${year}</div>
-				<h5 class="movie-title" tabindex="0" >
-					<a href="https://www.imdb.com/title/${id}/videogallery/">${title}</a>
-				</h5>
-			</div>
-		`;
-			cardWrapper.append(movieCard);
-			//todo better use swiper.appendSlide
-		}
-		// mySwiper.slideTo(mySwiper.slides.length - 10 - mySwiper.params.breakpoints[mySwiper.currentBreakpoint].slidesPerView);
-		mySwiper.navigation.update();
-	}
-	getMoviesIds(arrOfIds);
+	// getMoviesIds(arrOfIds);
+	await getRating(arrOfIds);
+	
 }
 
-
-async function getMoviesIds(arrOfIds) {
+async function getRating(arrOfIds) {
 	console.log('get movies ids');
-	for (let i of arrOfIds) {
+	for await (let i of arrOfIds) {
 		let url = `https://www.omdbapi.com/?i=${i}&apikey=${apikey}`;
 		fetch(url)
 			.then(response => response.json())
@@ -160,15 +97,15 @@ async function getMoviesIds(arrOfIds) {
 
 }
 
-function clearMovieData() {
+async function clearCardWrapper() {
+	console.log('i clear movie data')
 	mySwiper.removeAllSlides();
 	cardWrapper.innerHTML = '';
-	console.log('i clear movie data')
 }
 
 let page = 2;
 
-function makeResultsDefault() {
+async function makeResultsDefault() {
 	console.log('make results with default results');
 	let targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=${page}`;
 	startSpinnerPreloader();
@@ -177,7 +114,7 @@ function makeResultsDefault() {
 			if (response.ok) {
 				return response.json();
 			}
-			userMessage = `Error:${response.status}: ${response.statusText}`;
+			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			throw new Error(`${response.status}: ${response.statusText}`);
 		})
 		.then((moviesData) => {
@@ -206,9 +143,9 @@ function clearInput() {
 }
 
 function clearUserMessage() {
-	userMessage = '';
+	elMessage.textContent = '';
 }
-
+//todo delete func
 function callRate(userInput) {
 	console.log('call rate of input:' + userInput);
 
@@ -217,7 +154,7 @@ function callRate(userInput) {
 	requestWord
 		.then((response) => response.json())
 		.then(data => {
-			getMoviesIds(data.Search);
+			getRating(data.Search);
 			btnSearch.textContent = 'Search';
 			elLoadIcon.innerHTML = '';
 			elMessage.textContent = `Showing results for ${userInput}`;
@@ -229,28 +166,29 @@ function callRate(userInput) {
 		});
 }
 
-async function callApi(url) {
+async function getApiMoviesData(url) {
 	console.log('fetch movie api');
 	let userInput = elSearchInput.value;
+	clearCardWrapper();
 
 	fetch(url)
 		.then((response) => {
 			if (response.ok) {
 				return response.json();
 			}
-			userMessage = `No result found for ${userInput}`;
+			elMessage.textContent = `No result found for ${userInput}`;
 		})
 		.then(data => {
 			console.log('inside call Api' + data);
 			if (data.Response === 'False') {
-				userMessage = `No result found for ${userInput}`;
+				elMessage.textContent = `No result found for ${userInput}`;
 			} else {
-				parseDataOnSearch(data);
+				parseData(data);
 			}
 		})
 		.catch((error) => {
 			console.log(error);
-			userMessage = `Ошибка: ${error}`;
+			elMessage.textContent = `Ошибка: ${error}`;
 		});
 }
 
@@ -259,6 +197,7 @@ async function translateAllToEng(input) {
 	console.log('start func translateAllToEng with input: ' + input);
 	// var spinner = new Spinner(opts).spin(elLoadIcon);
 	btnSearch.textContent = 'Searching';
+
 	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
 	let url = `https://translate.yandex.net/api/v1.5/tr.json/translate
 ?key=${yaApi}
@@ -272,23 +211,29 @@ async function translateAllToEng(input) {
 		.then(data => {
 			console.log(data.text)
 			if (data.code !== 200) {
-				userMessage = `No results were found for ${data.text}`;
+				elMessage.textContent = `No results were found for ${data.text}`;
 			} else {
-				clearMovieData();
-
 				console.log('word is translated');
+
 				let urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}`;
-				callApi(urlToSendToApi);
-				userMessage = `Showing results for ${data.text}`;
-				callRate(data.text);
+				getApiMoviesData(urlToSendToApi);
+				elMessage.textContent = `Showing results for ${data.text}`;
+				// callRate(data.text);
 				btnSearch.textContent = 'Search';
+				mySwiper.on('reachEnd', async () => {
+					console.log('reach end');
+					makeResultsSearch(data.text);
+
+				});
 			}
 
 		})
 		.catch((error) => {
 			console.log(error);
-			userMessage = `Ошибка: ${error}`;
+			elMessage.textContent = `Ошибка: ${error}`;
 		})
+
+
 
 }
 
@@ -302,26 +247,27 @@ function makeResultsSearch(input) {
 			if (response.ok) {
 				return response.json();
 			}
-			userMessage = `Error:${response.status}: ${response.statusText}`;
+			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
 			throw new Error(`${response.status}: ${response.statusText}`);
 		})
 		.then((moviesData) => {
-
 			addNewMovies(moviesData);
 			endSpinnerPreloader();
+
 			console.log(mySwiper.slides.length)
 		})
 		.catch((error) => {
 			elMessage.textContent = `Ошибка: ${error}`;
-			console.log(error)
+			console.log(error);
 		});
 	page++;
+
 }
 
 
 export {
 	translateAllToEng,
-	callApi,
+	getApiMoviesData,
 	callRate,
 	clearUserMessage,
 	clearInput,
@@ -330,8 +276,7 @@ export {
 	pushRateToMovie,
 	parseData,
 	addNewMovies,
-	getMoviesIds,
-	clearMovieData,
+	getRating,
+	clearCardWrapper,
 	makeResultsDefault,
-	parseDataOnSearch
 };

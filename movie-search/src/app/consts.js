@@ -7,5 +7,6 @@ const elLoadIcon = document.querySelector('#load-icon');
 const elMessage = document.querySelector('#message');
 const btnSearch = document.querySelector('#buttonSearch');
 const cross = document.querySelector('.with-cross');
+const userInput = elSearchInput.value;
 
-export {cross,elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear,elLoadIcon,elMessage,btnSearch};
+export {userInput,cross,elSearchInput, elSearchBtn,apikey,cardWrapper,elIconClear,elLoadIcon,elMessage,btnSearch};

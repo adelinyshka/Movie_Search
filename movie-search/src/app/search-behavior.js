@@ -2,38 +2,29 @@ import {
 	elMessage,
 	elSearchBtn,
 	elSearchInput,
+	userInput
 } from "./consts";
 import {
 	translateAllToEng,
 	startSpinnerPreloader,
-	clearMovieData, makeResultsDefault,
+	clearCardWrapper, makeResultsDefault,
 } from './working-functions';
 import {mySwiper} from "./slider-swiper";
 
-let userMessage = elMessage.textContent;
 
-const kbWrapper = document.querySelector('.keyboard-wrapper');
 elSearchBtn.addEventListener('click', function (e) {
 	e.preventDefault();
-
-	const userInput = elSearchInput.value;
-
-
 	console.groupCollapsed('bnt search clicked, input: '+ userInput);
 
 	if (userInput.length < 3) {
-		userMessage = 'Введите минимум 3 символа';
+		elMessage.textContent = 'Введите минимум 3 символа';
 	} else {
-		if (kbWrapper) {
-			kbWrapper.classList.add('d-none');
-		}
+		startSpinnerPreloader();
 
 		elMessage.textContent = `Looking for ${userInput}`;
-		// clearMovieData();
-		startSpinnerPreloader();
 		translateAllToEng(userInput);
 
+
 	}
-	elSearchInput.focus();
 
 });

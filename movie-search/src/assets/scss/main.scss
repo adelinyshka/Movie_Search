@@ -58,12 +58,6 @@ img.movie-pic {
 	width: 250px;
 	height: 350px;
 	display: inline-block;
-
-	&:hover,
-	&:focus,
-	&:active {
-		transform: scale(1.02);
-		}
 	}
 
 h5.movie-title {
@@ -145,6 +139,11 @@ button.with-cross {
 	background: #1b1e21;
 	border-radius: 8px;
 	height: 504px;
+	&:hover,
+	&:focus,
+	&:active {
+		transform: scale(1.02);
+		}
 	}
 
 #icon-clear.hidden {

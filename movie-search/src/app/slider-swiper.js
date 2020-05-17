@@ -82,6 +82,6 @@ const mySwiper = document.querySelector('.swiper-container').swiper
 
 mySwiper.init();
 mySwiper.slideTo(0);
-// mySwiper.width(80);
+
 
 export {mySwiper, opts};
