@@ -1,51 +1,62 @@
 import {
 	apikey,
-	elLoadIcon,
-	elMessage,
+	elMessage, elSearchBtn,
 	elSearchInput,
-	btnSearch
 } from "./consts";
 import {
-	clearUserMessage,
-	clearInput,
-	startSpinnerPreloader,
-	endSpinnerPreloader,
-	pushRateToMovie,
 	parseData,
-	addNewMovies,
-	getRating,
-	clearCardWrapper,userInput,
-	makeResultsDefault
+	addCardsByClick, startSpinnerPreloader, translateAllToEng,
 } from './working-functions';
 import {mySwiper} from "./slider-swiper";
 
 elSearchInput.focus();
 
-document.addEventListener("DOMContentLoaded", function(event) {
-	console.log('load default');
+let input = 'sea';
+let page = 1;
 
-	const targetUrl = `https://www.omdbapi.com/?s=sea&apikey=${apikey}&page=1`;
-	const requestDefaultMovies = fetch(targetUrl);
-
-	startSpinnerPreloader();
-	requestDefaultMovies
-		.then((response) => {
-			if (response.ok) {
-				return response.json();
-			}
-			elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
-		})
-		.then((moviesData) => {
-			console.log('parse on load!');
-			parseData(moviesData);
-		})
-		.catch((error) => {
-			elMessage.textContent = `${error}`;
-		});
+mySwiper.on('reachEnd', async () => {
+	page++;
+	if(elSearchInput.value !== '') {
+		input = elSearchInput.value;
+		console.log('input = ' + elSearchInput.value)
+	}
+	console.log('reach end');
+	console.log(input+'!!!');
+	translateAllToEng(input,page);
 
 });
-// функция подгружающая 2 результаты
-// mySwiper.on('reachEnd', async () => {
-// 	console.log('reach end');
-// 	makeResultsDefault();
-// });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+	console.log('load default');
+	translateAllToEng(input,page);
+	// const targetUrl = `https://www.omdbapi.com/?s=${input}&apikey=${apikey}&page=1`;
+
+	// fetch(targetUrl)
+	// 	.then((response) => {
+	// 		if (response.ok) {
+	// 			return response.json();
+	// 		}
+	// 		elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
+	// 	})
+	// 	.then((moviesData) => {
+	// 		console.log('parse on load!');
+	// 		parseData(moviesData);
+	// 	})
+	// 	.catch((error) => {
+	// 		elMessage.textContent = `${error}`;
+	// 	});
+
+});
+
+elSearchBtn.addEventListener('click', function (e) {
+	e.preventDefault();
+	console.groupCollapsed('bnt search clicked, input: '+ userInput);
+	if (elSearchInput.value.length < 3) {
+		elMessage.textContent = 'Введите минимум 3 символа';
+	} else {
+		startSpinnerPreloader();
+		// elMessage.textContent = `Looking for ${userInput}`;
+		translateAllToEng(input,page);
+	}
+});

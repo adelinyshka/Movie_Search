@@ -381,6 +381,8 @@ class Keyboard {
 				elMessage.textContent = 'Введите минимум 3 символа';
 			} else {
 				elMessage.textContent = `Looking for ${userInput}`;
+				const kb = document.querySelector('.keyboard-wrapper');
+				kb.classList.add('d-none');
 				translateAllToEng(userInput);
 			}
 			elSearchInput.focus();
