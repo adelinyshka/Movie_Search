@@ -16,12 +16,11 @@ let page = 1;
 mySwiper.on('reachEnd', async () => {
 	startSpinnerPreloader();
 
-	page++;
-
 	if (elSearchInput.value !== '') {
 		input = elSearchInput.value;
 	}
 	translateAllToEng(input, page);
+	page++;
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -42,4 +41,3 @@ elSearchBtn.addEventListener('click', function (e) {
 		translateAllToEng(input, page);
 	}
 });
-

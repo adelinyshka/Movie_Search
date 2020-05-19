@@ -1,4 +1,4 @@
-import {
+import {yaApi,pattern,
 	apikey,
 	cardWrapper,
 	elLoadIcon,
@@ -15,10 +15,6 @@ async function translateAllToEng(input, page) {
 
 	mySwiper.isEnd = false;
 
-	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
-
-	const pattern = /([а-я]+)/ui;
-
 	let urlToSendToApi;
 
 	if (pattern.test(input)) {
@@ -30,8 +26,6 @@ async function translateAllToEng(input, page) {
 &format=plain
 `;
 
-		console.log('yes i have ru letters')
-
 		fetch(url)
 			.then(res => res.json())
 
@@ -42,10 +36,12 @@ async function translateAllToEng(input, page) {
 				} else {
 
 					urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}&page=${page}`;
+
 					fetch(urlToSendToApi)
 						.then((response) => {
 
 							if (response.ok) {
+								console.log(response);
 								return response.json();
 							}
 							elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
@@ -54,7 +50,7 @@ async function translateAllToEng(input, page) {
 						.then((moviesData) => {
 							createCards(moviesData);
 							getRating(arrOfIds);
-							elMessage.textContent = `Showing results for ...`;
+							elMessage.textContent = `Showing results for ${data.text}`;
 						})
 						.catch((error) => {
 							console.log(error)
@@ -69,13 +65,12 @@ async function translateAllToEng(input, page) {
 				elMessage.textContent = `Ошибка: ${error}`;
 			});
 	} else {
-		console.log('no i dont');
-
 		urlToSendToApi = `https://www.omdbapi.com/?s=${input}&apikey=${apikey}&page=${page}`;
 		fetch(urlToSendToApi)
 			.then((response) => {
 
 				if (response.ok) {
+					console.log(response);
 					return response.json();
 				}
 				elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
@@ -84,7 +79,7 @@ async function translateAllToEng(input, page) {
 			.then((moviesData) => {
 				createCards(moviesData);
 				getRating(arrOfIds);
-				elMessage.textContent = `Showing results for ...`;
+				elMessage.textContent = `Showing results for ${input}`;
 			})
 			.catch((error) => {
 				console.log(error)
@@ -132,7 +127,7 @@ async function createCards(data) {
 		}
 		return arrOfIds;
 	} catch (err) {
-		translateAllToEng('sea', 1);
+		// translateAllToEng('sea', 1);
 		elMessage.textContent += `Error: ${err} No result for...`;
 	}
 }
