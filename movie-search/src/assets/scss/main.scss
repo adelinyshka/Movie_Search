@@ -221,7 +221,7 @@ button.with-cross {
 	position: absolute;
 	right: -11px;
 	font-size: 31px;
-	top: -55px;
+	top: 0;
 	}
 
 .swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
@@ -229,7 +229,7 @@ button.with-cross {
 	position: absolute;
 	left: -10px;
 	font-size: 31px;
-	top: -55px;
+	top: 0;
 	}
 
 .swiper-pagination-bullet-active {

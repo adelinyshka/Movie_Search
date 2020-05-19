@@ -1,5 +1,9 @@
 import {elMessage, elSearchInput} from "./consts";
-import {translateAllToEng} from './working-functions';
+import {
+	clearCardWrapper,
+	startSpinnerPreloader,
+	translateAllToEng
+} from './working-functions';
 
 const formMovie = document.querySelector('#searchMovieForm');
 
@@ -376,11 +380,13 @@ class Keyboard {
 			checker5 = event.code;
 		}
 		if (checker5 === 'Enter') {
+			startSpinnerPreloader();
+
 			const userInput = elSearchInput.value;
 			if (userInput.length < 3) {
 				elMessage.textContent = 'Введите минимум 3 символа';
 			} else {
-				elMessage.textContent = `Looking for ${userInput}`;
+				clearCardWrapper();
 				const kb = document.querySelector('.keyboard-wrapper');
 				kb.classList.add('d-none');
 				translateAllToEng(userInput);

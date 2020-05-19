@@ -1,13 +1,13 @@
-// import 'jquery';
 import 'bootstrap';
 import 'swiper';
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import './assets/scss/all_styles.scss';
 import './app/consts';
-import './app/slider-swiper';
-import './app/search-behavior';
+import './app/slider';
 import './app/keyboard';
-import './app/default-behavior';
+import './app/main';
 import './app/working-functions';
 import './app/listeners';
+import './app/keyboard';
+import './app/preloader';
