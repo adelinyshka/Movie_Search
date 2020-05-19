@@ -12,52 +12,88 @@ import {opts} from './preloader';
 let arrOfIds = [];
 
 async function translateAllToEng(input, page) {
+
 	mySwiper.isEnd = false;
+
 	let yaApi = 'trnsl.1.1.20200507T172307Z.9cd6f5e16be3ab0b.2f6b74e3ebb2279b7c6daa0f69031c5a7f3f314f';
-	let url = `https://translate.yandex.net/api/v1.5/tr.json/translate
+
+	const pattern = /([а-я]+)/ui;
+
+	let urlToSendToApi;
+
+	if (pattern.test(input)) {
+
+		let url = `https://translate.yandex.net/api/v1.5/tr.json/translate
 ?key=${yaApi}
 &text=${input}
 &lang=ru-en
 &format=plain
 `;
 
-	fetch(url)
-		.then(res => res.json())
-		.then(data => {
-			if (data.code !== 200) {
-				elMessage.textContent = `No results were found for ${data.text} + code error: ${data.code}`;
-				endSpinnerPreloader();
-			} else {
+		console.log('yes i have ru letters')
 
-				let urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}&page=${page}`;
+		fetch(url)
+			.then(res => res.json())
 
-				fetch(urlToSendToApi)
-					.then((response) => {
+			.then(data => {
+				if (data.code !== 200) {
+					elMessage.textContent = `No results were found for ${data.text} + code error: ${data.code}`;
+					endSpinnerPreloader();
+				} else {
 
-						if (response.ok) {
-							return response.json();
-						}
-						elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
-					})
+					urlToSendToApi = `https://www.omdbapi.com/?s=${data.text}&apikey=${apikey}&page=${page}`;
+					fetch(urlToSendToApi)
+						.then((response) => {
 
-					.then((moviesData) => {
-						createCards(moviesData);
-						getRating(arrOfIds);
-						elMessage.textContent = `Showing results for ${data.text}`;
-					})
-					.catch((error) => {
-						console.log(error)
-						elMessage.textContent = `Ошибка: ${error}`;
-					});
+							if (response.ok) {
+								return response.json();
+							}
+							elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
+						})
 
-				callRate(data.text);
+						.then((moviesData) => {
+							createCards(moviesData);
+							getRating(arrOfIds);
+							elMessage.textContent = `Showing results for ...`;
+						})
+						.catch((error) => {
+							console.log(error)
+							elMessage.textContent = `Ошибка: ${error}`;
+						});
 
-				endSpinnerPreloader();
-			}
-		})
-		.catch((error) => {
-			elMessage.textContent = `Ошибка: ${error}`;
-		});
+					callRate(data.text);
+					endSpinnerPreloader()
+				}
+			})
+			.catch((error) => {
+				elMessage.textContent = `Ошибка: ${error}`;
+			});
+	} else {
+		console.log('no i dont');
+
+		urlToSendToApi = `https://www.omdbapi.com/?s=${input}&apikey=${apikey}&page=${page}`;
+		fetch(urlToSendToApi)
+			.then((response) => {
+
+				if (response.ok) {
+					return response.json();
+				}
+				elMessage.textContent = `Error:${response.status}: ${response.statusText}`;
+			})
+
+			.then((moviesData) => {
+				createCards(moviesData);
+				getRating(arrOfIds);
+				elMessage.textContent = `Showing results for ...`;
+			})
+			.catch((error) => {
+				console.log(error)
+				elMessage.textContent = `Ошибка: ${error}`;
+			});
+
+		callRate(input);
+		endSpinnerPreloader()
+	}
 
 }
 

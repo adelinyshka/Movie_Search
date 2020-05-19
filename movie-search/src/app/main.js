@@ -42,3 +42,4 @@ elSearchBtn.addEventListener('click', function (e) {
 		translateAllToEng(input, page);
 	}
 });
+
