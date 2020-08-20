@@ -1,0 +1,13 @@
+import 'bootstrap';
+import 'swiper';
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import './assets/scss/all_styles.scss';
+import './app/consts';
+import './app/slider';
+import './app/keyboard';
+import './app/main';
+import './app/working-functions';
+import './app/listeners';
+import './app/keyboard';
+import './app/preloader';

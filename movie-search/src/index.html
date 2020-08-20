@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="app movie search">
+	<meta name="keywords" content="application for search good movie">
+	<link rel="icon" href="favicon.ico">
+	<title>Movie Search</title>
+
+	<link rel="stylesheet"
+	      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+</head>
+
+<body>
+
+<header class="d-flex justify-content-center movie-header" role="banner">
+	<h1 class="text-center" tabindex="0">Movie Search</h1>
+</header>
+
+<main>
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-12">
+				<div class="container-for-load-icon">
+					<span style="height: 50px;" id="load-icon"></span>
+				</div>
+			</div>
+
+			<div class="col-12">
+				<div style="height: 50px;" class="" id="message"></div>
+			</div>
+
+
+			<div class="col-12">
+
+				<form id="searchMovieForm" class="text-center">
+					<div class="form-group">
+						<label>
+							<i class="fas fa-search fa-lg"
+							   style="position:absolute; top: 10px; left: 11px"></i>
+
+							<input class="form-control input-movie" type="search"
+							       id="movie-input" name="searcher"
+							       placeholder="Search movie"
+							       autofocus="autofocus" tabindex="0" autocomplete="off"
+							       minlength="3">
+							<button class="with-cross">
+								<svg id="icon-clear" class="bi bi-x" width="2em"
+								     height="2em"
+								     viewBox="0 0 16 16" fill="grey"
+								     xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd"
+									      d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
+									      clip-rule="evenodd"/>
+									<path fill-rule="evenodd"
+									      d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
+									      clip-rule="evenodd"/>
+								</svg>
+							</button>
+
+
+							<button class="with-keyboard">
+								<i id="keyboardIcon" class="fas fa-keyboard fa-2x"
+								   style="position:absolute;
+							top:4px; right: 10px"></i>
+							</button>
+
+						</label>
+
+						<button class="btn-search" id="buttonSearch" tabindex="0">Search
+						</button>
+					</div>
+				</form>
+
+			</div>
+
+			<div class="col-12">
+				<div class="swiper-container">
+					<div class="slider-buttons">
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+					<div class="swiper-wrapper" id="movies-wrapper">
+
+
+					</div>
+
+
+					<div class="swiper-pagination" id="pagination"></div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer>
+	<a class="telegram-link p-3"
+	   href="https://tlgg.ru/@adel_dubinnikova"
+	   title="telegram" tabindex="0">Telegram</a>
+	<a class="github-link p-3"
+	   href="https://github.com/adelinyshka"
+	   title="github" tabindex="0">Github</a>
+</footer>
+
+</body>
+</html>
