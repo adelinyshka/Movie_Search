@@ -6,3 +6,4 @@ Used technologies:
 - native JavaScript
 - HTML, CSS
 - Webpack
+
