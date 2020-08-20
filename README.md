@@ -6,3 +6,5 @@ Used technologies:
 - native JavaScript
 - HTML, CSS
 - Webpack
+
+Please check development in branch "movie-search"
